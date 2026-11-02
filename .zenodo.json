@@ -1,0 +1,23 @@
+{
+  "title": "Code for the hybrid IMB2 + 4D-Var CrIS NH3 inversion",
+  "upload_type": "software",
+  "version": "v1.0.0",
+  "description": "Code behind the ERL paper on the hybrid IMB2 + 4D-Var inversion of NH3 emissions with CrIS retrievals and the CMAQ adjoint: the CMAQ adjoint (NH3 version), a snapshot of the py4dvar framework, and the IMB2 mass-balance code with the driver for the production run.",
+  "keywords": ["ammonia", "emissions inversion", "CrIS", "CMAQ adjoint", "4D-Var", "mass balance"],
+  "creators": [
+    {"name": "Lyu, Congmeng", "affiliation": "NOAA Chemical Sciences Laboratory, Boulder, CO, and CIRES, University of Colorado Boulder", "orcid": "0000-0002-6946-7835"},
+    {"name": "Liu, Jiachen", "affiliation": "Department of Civil, Architectural, and Environmental Engineering, Drexel University (now at the California Air Resources Board)", "orcid": "0009-0004-9331-3168"},
+    {"name": "Shephard, Mark W.", "affiliation": "Environment and Climate Change Canada, Toronto, ON", "orcid": "0000-0002-2867-9612"},
+    {"name": "Sitwell, Michael", "affiliation": "Environment and Climate Change Canada, Toronto, ON", "orcid": "0000-0003-4518-6278"},
+    {"name": "Henze, Daven K.", "affiliation": "Department of Mechanical Engineering, University of Colorado Boulder", "orcid": "0000-0001-6431-4963"},
+    {"name": "Lombardo, Matthew", "affiliation": "Department of Civil, Architectural, and Environmental Engineering, Drexel University"},
+    {"name": "Zhao, Shunliu", "affiliation": "Department of Civil and Environmental Engineering, Carleton University, Ottawa, ON", "orcid": "0000-0003-0738-1048"},
+    {"name": "Hakami, Amir", "affiliation": "Department of Civil and Environmental Engineering, Carleton University, Ottawa, ON", "orcid": "0000-0003-3122-9548"},
+    {"name": "McDonald, Brian C.", "affiliation": "NOAA Chemical Sciences Laboratory, Boulder, CO", "orcid": "0000-0001-8600-5096"},
+    {"name": "Rasool, Quazi Z.", "affiliation": "NOAA Chemical Sciences Laboratory, Boulder, CO, and CIRES, University of Colorado Boulder", "orcid": "0000-0001-6274-6236"},
+    {"name": "Silver, Jeremy D.", "affiliation": "School of Mathematics and Statistics, University of Melbourne, VIC", "orcid": "0000-0003-1502-6249"},
+    {"name": "Thomas, Steven", "affiliation": "University of Melbourne, VIC"},
+    {"name": "Rayner, Peter", "affiliation": "The Superpower Institute, Fitzroy, VIC", "orcid": "0000-0001-7707-6298"},
+    {"name": "Capps, Shannon L.", "affiliation": "Department of Civil, Architectural, and Environmental Engineering, Drexel University", "orcid": "0000-0002-6872-6604"}
+  ]
+}
