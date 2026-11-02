@@ -1,0 +1,1273 @@
+   Model archive path: /home/cl3293/CMAQ_adj_NH3/cmaq_adj
+         library path: /mnt/HA/groups/cappsGrp/lib
+set Adj_Home = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+set Project = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+set GlobInc = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL
+git status
+# On branch test
+# Your branch and 'origin/CMAQ_adj_NH3_mhrzmomeni' have diverged,
+# and have 1 and 1 different commit(s) each, respectively.
+#
+# Changed but not updated:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   ../../ICL/mech/cb05cl_ae5_aq/AE_SPC.EXT
+#	deleted:    ../BnmkAdjForcCalc.py
+#	deleted:    ../ExampleCMAQadjForcingCalc.py
+#	deleted:    ../bldit.adjoint.bwd.sample
+#	deleted:    ../bldit.adjoint.fwd.sample
+#	deleted:    ../force_CO2_dottest.py
+#	modified:   ../in_out.q
+#	deleted:    ../run.adj.bwd.bnmk
+#	deleted:    ../run.adj.fwd.bnmk
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	../../BLDMAKE_git/bldmake
+#	../../BLDMAKE_git/make.log
+#	../../ICL/mech/cb05cl_ae5_aq_GC_NH3/
+#	../../ICL/mech/cb05cl_ae5_aq_NR/
+#	../../ICL/mech/cb05cl_ae5_aq_full/
+#	../BLD_bwd_NH3/
+#	../BLD_bwd_NH3_new/
+#	../BLD_bwd_NH3_new2/
+#	../BLD_bwd_NH3_segfault/
+#	../BLD_bwd_NH3_vf/
+#	../BLD_fwd_NH3/
+#	../BnmkAdjForcCalc_NH3.l1.hr2.py
+#	../BnmkAdjForcCalc_NH3.l22.hr2.py
+#	../CMAQAdjEvalTool.v1.1.proteus.py
+#	../CMAQadjBnmkVis_ACONC.proteus.py
+#	../CMAQadjBnmkVis_AdjForc.proteus.py
+#	../CMAQadjBnmkVis_EM.LGRID.proteus.py
+#	../bwd_NH3_vf.log
+#	../in_out.org.q
+#	../run.adj.bwd.1day.base.proteus
+#	../run.adj.bwd.1day.higher.layers.proteus
+#	../run.adj.bwd.1day.higher.layers.proteus.o540131
+#	../run.adj.bwd.1day.higher.layers.proteus.o540132
+#	../run.adj.bwd.1day.higher.layers.proteus.o540146
+#	../run.adj.bwd.1day.higher.layers.proteus.o540171
+#	../run.adj.bwd.1day.higher.layers.proteus.o540172
+#	../run.adj.bwd.1day.higher.layers.proteus.o540173
+#	../run.adj.bwd.1day.higher.layers.proteus.o540174
+#	../run.adj.bwd.1day.higher.layers.proteus.o540175
+#	../run.adj.bwd.1day.higher.layers.proteus.o540186
+#	../run.adj.bwd.1day.higher.layers.proteus.o540187
+#	../run.adj.bwd.1day.higher.layers.proteus.o540188
+#	../run.adj.bwd.1day.higher.layers.proteus.o540189
+#	../run.adj.bwd.1day.higher.layers.proteus.o540196
+#	../run.adj.bwd.1day.higher.layers.proteus.o540214
+#	../run.adj.bwd.1day.higher.layers.proteus.o540216
+#	../run.adj.bwd.1day.higher.layers.proteus.o540217
+#	../run.adj.bwd.1day.higher.layers.proteus.o540218
+#	../run.adj.bwd.1day.higher.layers.proteus.o540220
+#	../run.adj.bwd.1day.higher.layers.proteus.o540221
+#	../run.adj.bwd.1day.higher.layers.proteus.o540222
+#	../run.adj.bwd.1day.higher.layers.proteus.o540395
+#	../run.adj.bwd.1day.higher.layers.proteus.o540396
+#	../run.adj.bwd.1day.higher.layers.proteus.o540397
+#	../run.adj.bwd.1day.higher.layers.proteus.o540398
+#	../run.adj.bwd.1day.higher.layers.proteus.o540399
+#	../run.adj.bwd.1day.higher.layers.proteus.o540400
+#	../run.adj.bwd.1day.higher.layers.proteus.o540404
+#	../run.adj.bwd.1day.higher.layers.proteus.o540406
+#	../run.adj.bwd.1day.higher.layers.proteus.o540409
+#	../run.adj.bwd.1day.higher.layers.proteus.o540411
+#	../run.adj.bwd.1day.higher.layers.proteus.o540413
+#	../run.adj.bwd.1day.higher.layers.proteus.o540415
+#	../run.adj.bwd.1day.higher.layers.proteus.o540416
+#	../run.adj.bwd.1day.higher.layers.proteus.o540417
+#	../run.adj.bwd.1day.higher.layers.vf.proteus
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539596
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539597
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539598
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539599
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539600
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539601
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539605
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539606
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539607
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539608
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539609
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539610
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539611
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539612
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539613
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539614
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539813
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539814
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539909
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o539910
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o540127
+#	../run.adj.bwd.1day.higher.layers.vf.proteus.o540128
+#	../run.adj.bwd.1day.proteus
+#	../run.adj.bwd.1day.proteus.o532815
+#	../run.adj.bwd.1day.proteus.o532836
+#	../run.adj.bwd.1day.proteus.o532837
+#	../run.adj.bwd.1day.proteus.o532838
+#	../run.adj.bwd.1day.proteus.o532840
+#	../run.adj.bwd.1day.proteus.o532842
+#	../run.adj.bwd.1day.proteus.o532843
+#	../run.adj.bwd.1day.proteus.o532849
+#	../run.adj.bwd.1day.proteus.o532850
+#	../run.adj.bwd.1day.proteus.o532851
+#	../run.adj.bwd.1day.proteus.o532852
+#	../run.adj.bwd.1day.proteus.o532853
+#	../run.adj.bwd.1day.proteus.o532858
+#	../run.adj.bwd.1day.proteus.o540098
+#	../run.adj.bwd.1day.proteus.o540099
+#	../run.adj.bwd.1day.proteus.o540100
+#	../run.adj.bwd.1day.proteus.o540101
+#	../run.adj.bwd.1day.proteus.o540102
+#	../run.adj.bwd.1day.proteus.o540106
+#	../run.adj.bwd.1day.proteus.o540107
+#	../run.adj.bwd.1day.proteus.o540110
+#	../run.adj.bwd.1day.proteus.o540112
+#	../run.adj.bwd.1day.proteus.o540113
+#	../run.adj.bwd.1day.proteus.o540114
+#	../run.adj.bwd.1day.proteus.o540115
+#	../run.adj.bwd.1day.proteus.o540118
+#	../run.adj.bwd.1day.proteus.o540119
+#	../run.adj.bwd.1day.proteus.o540120
+#	../run.adj.bwd.1day.proteus.o540121
+#	../run.adj.bwd.1day.proteus.o540123
+#	../run.adj.bwd.1day.proteus.o540124
+#	../run.adj.fwd.2day.base.proteus
+#	../run.adj.fwd.2day.higher.layers.proteus
+#	../run.adj.fwd.2day.higher.layers.proteus.o540176
+#	../run.adj.fwd.2day.higher.layers.proteus.o540178
+#	../run.adj.fwd.2day.higher.layers.proteus.o540179
+#	../run.adj.fwd.2day.higher.layers.proteus.o540180
+#	../run.adj.fwd.2day.higher.layers.proteus.o540181
+#	../run.adj.fwd.2day.higher.layers.proteus.o540209
+#	../run.adj.fwd.2day.higher.layers.proteus.o540377
+#	../run.adj.fwd.2day.higher.layers.proteus.o540394
+#	../run.adj.fwd.2day.higher.layers.proteus.o540418
+#	../run.adj.fwd.2day.higher.layers.proteus.o540419
+#	../run.adj.fwd.2day.higher.layers.proteus.o540420
+#	../run.adj.fwd.2day.pert.proteus
+#	../run.adj.fwd.2day.proteus
+#	../take.plot.l22.hr.snorm.py
+#	../take_plot.l22.hr2.py
+#	../take_plot.py
+#	./
+no changes added to commit (use "git add" and/or "git commit -a")
+setenv REPOROOT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+set Base = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts
+set APPL = fwd_NH3_org
+set MODEL = ADJOINT_FWD
+set Opt = verbose
+set MakeFileOnly
+set ParOpt
+set Revision = release
+set ModDriver = driver/yamo_adj_fwd
+set ModChkpnt = chkpnt/chkpnt_ioapi
+if ( 1 ) then
+set ModPar = par/par
+else
+set ModInit = init/yamo
+set ModAdjc = adjcon/adjcon_noop
+set ModCpl = couple/gencoor
+set ModHadv = hadv/yamo_cadj_fwd
+set ModVadv = vadv/vyamo_cadj_fwd
+set ModHdiff = hdiff/multiscale_adj_fwd
+set ModVdiff = vdiff/acm2_inline_adj_fwd
+set ModPhot = phot/phot_noop
+set ModChem = chem/chem_noop
+set ModAero = aero/aero5_adj_fwd
+set ModAdepv = aero_depv/aero_depv2
+set ModCloud = cloud/cloud_acm_ae5_fwd
+set ModPa = procan/pa
+set ModUtil = util/util_adj
+set Mechanism = mech/cb05cl_ae5_aq
+set Tracer = mech/trac0
+set PABase = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL
+set PAOpt = procan/pa_noop
+set CFG = cfg.fwd_NH3_org
+set Bld = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org
+set MODLOC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR
+if ( -d /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR ) /bin/rm -Rf /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR
+mkdir -p /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR
+set FC = /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort
+set CC = /opt/mellanox/openshmem/2.2/bin/mpicc
+set FP = /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort
+set MPICH = /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi
+set STENEX = /mnt/HA/groups/cappsGrp/lib/se_snl
+set FSTD = -O3 -fno-alias -mp1 -fp-model source -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include
+set F_FLAGS = -fixed -132 -O0 -override-limits -mp1 -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort
+set CPP_FLAGS = 
+set C_FLAGS = -O2 -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include
+set LINK_FLAGS = -static-intel -openmp
+set Blder = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/BLDMAKE_git/bldmake -verbose
+set IOAPI = /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64mpifort -lioapi
+set ICL_IOAPI = /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src
+set NETCDF = /mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff
+set PARIO = /mnt/HA/groups/cappsGrp/lib/pario -lpario
+if ( ! -e /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org ) then
+if ( ! -d /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org ) then
+endif
+cd /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org
+if ( 1 ) then
+set Mpich = /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi
+set seL = se_snl
+cp -p /mnt/HA/groups/cappsGrp/lib/se_snl/se_bndy_copy_info_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_bndy_copy_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_comm_info_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_comm_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_data_copy_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_data_recv_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_data_send_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_disp_info_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_domain_info_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_gather_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_global_max_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_global_min_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_global_sum_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_init_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_internal_util_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_modules.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_ori_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_pe_info_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_reconfig_grid_info_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_reconfig_grid_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_slice_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_subgrid_info_ext.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_term_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/se_util_module.mod /mnt/HA/groups/cappsGrp/lib/se_snl/swap_sandia.mod /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR
+set LIB2 = -L/mnt/HA/groups/cappsGrp/lib/pario -lpario
+set LIB3 =
+set LIB4 = -L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/intel64/lib -lmpich
+set Str1 = ( // Parallel / Include message passing definitions )
+set Str2 = ( include SUBST_MPICH /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/../include/mpif.h ; )
+else
+set LIB1 = -L/mnt/HA/groups/cappsGrp/lib/se_snl -lse_snl
+set LIB5 = -L/mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64mpifort -lioapi
+set LIB6 = -L/mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff
+set LIBS = -L/mnt/HA/groups/cappsGrp/lib/se_snl -lse_snl -L/mnt/HA/groups/cappsGrp/lib/pario -lpario  -L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/intel64/lib -lmpich -L/mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64mpifort -lioapi -L/mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff
+set ICL_PAR = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/par
+set ICL_CONST = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/const
+set ICL_FILES = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/filenames
+set ICL_EMCTL = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl
+set ICL_MECH = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq
+set ICL_TRAC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0
+set ICL_PA = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop
+if ( 0 ) then
+set CV =
+endif
+if ( 1 ) then
+set PAR = ( -Dparallel -Dcluster -DINTERPB=PINTERPB -DM3ERR=PM3ERR -DM3EXIT=PM3EXIT -DM3WARN=PM3WARN -DSHUT3=PSHUT3 -DWRITE3=PWRITE3 )
+set Popt = SE
+else
+set STX1 = ( -DSUBST_MODULES=SE_MODULES -DSUBST_BARRIER=SE_BARRIER )
+set STX2 = ( -DSUBST_GLOBAL_MAX=SE_GLOBAL_MAX -DSUBST_GLOBAL_MIN=SE_GLOBAL_MIN -DSUBST_GLOBAL_MIN_DATA=SE_GLOBAL_MIN_DATA -DSUBST_GLOBAL_TO_LOCAL_COORD=SE_GLOBAL_TO_LOCAL_COORD -DSUBST_GLOBAL_SUM=SE_GLOBAL_SUM -DSUBST_GLOBAL_LOGICAL=SE_GLOBAL_LOGICAL -DSUBST_LOOP_INDEX=SE_LOOP_INDEX -DSUBST_SUBGRID_INDEX=SE_SUBGRID_INDEX )
+set STX3 = ( -DSUBST_HI_LO_BND_PE=SE_HI_LO_BND_PE -DSUBST_SUM_CHK=SE_SUM_CHK -DSUBST_INIT_ARRAY=SE_INIT_ARRAY -DSUBST_COMM=SE_COMM -DSUBST_MY_REGION=SE_MY_REGION -DSUBST_SLICE=SE_SLICE -DSUBST_GATHER=SE_GATHER -DSUBST_DATA_COPY=SE_DATA_COPY -DSUBST_IN_SYN=SE_IN_SYN )
+set Cfile = cfg.fwd_NH3_org.bld
+set quote = "
+echo
+echo model       ADJOINT_FWD;
+echo
+echo FPP         /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort;
+echo
+set text = "  -Dparallel -Dcluster -DINTERPB=PINTERPB -DM3ERR=PM3ERR -DM3EXIT=PM3EXIT -DM3WARN=PM3WARN -DSHUT3=PSHUT3 -DWRITE3=PWRITE3 -DSUBST_MODULES=SE_MODULES -DSUBST_BARRIER=SE_BARRIER -DSUBST_GLOBAL_MAX=SE_GLOBAL_MAX -DSUBST_GLOBAL_MIN=SE_GLOBAL_MIN -DSUBST_GLOBAL_MIN_DATA=SE_GLOBAL_MIN_DATA -DSUBST_GLOBAL_TO_LOCAL_COORD=SE_GLOBAL_TO_LOCAL_COORD -DSUBST_GLOBAL_SUM=SE_GLOBAL_SUM -DSUBST_GLOBAL_LOGICAL=SE_GLOBAL_LOGICAL -DSUBST_LOOP_INDEX=SE_LOOP_INDEX -DSUBST_SUBGRID_INDEX=SE_SUBGRID_INDEX -DSUBST_HI_LO_BND_PE=SE_HI_LO_BND_PE -DSUBST_SUM_CHK=SE_SUM_CHK -DSUBST_INIT_ARRAY=SE_INIT_ARRAY -DSUBST_COMM=SE_COMM -DSUBST_MY_REGION=SE_MY_REGION -DSUBST_SLICE=SE_SLICE -DSUBST_GATHER=SE_GATHER -DSUBST_DATA_COPY=SE_DATA_COPY -DSUBST_IN_SYN=SE_IN_SYN";
+echo cpp_flags   "  -Dparallel -Dcluster -DINTERPB=PINTERPB -DM3ERR=PM3ERR -DM3EXIT=PM3EXIT -DM3WARN=PM3WARN -DSHUT3=PSHUT3 -DWRITE3=PWRITE3 -DSUBST_MODULES=SE_MODULES -DSUBST_BARRIER=SE_BARRIER -DSUBST_GLOBAL_MAX=SE_GLOBAL_MAX -DSUBST_GLOBAL_MIN=SE_GLOBAL_MIN -DSUBST_GLOBAL_MIN_DATA=SE_GLOBAL_MIN_DATA -DSUBST_GLOBAL_TO_LOCAL_COORD=SE_GLOBAL_TO_LOCAL_COORD -DSUBST_GLOBAL_SUM=SE_GLOBAL_SUM -DSUBST_GLOBAL_LOGICAL=SE_GLOBAL_LOGICAL -DSUBST_LOOP_INDEX=SE_LOOP_INDEX -DSUBST_SUBGRID_INDEX=SE_SUBGRID_INDEX -DSUBST_HI_LO_BND_PE=SE_HI_LO_BND_PE -DSUBST_SUM_CHK=SE_SUM_CHK -DSUBST_INIT_ARRAY=SE_INIT_ARRAY -DSUBST_COMM=SE_COMM -DSUBST_MY_REGION=SE_MY_REGION -DSUBST_SLICE=SE_SLICE -DSUBST_GATHER=SE_GATHER -DSUBST_DATA_COPY=SE_DATA_COPY -DSUBST_IN_SYN=SE_IN_SYN";
+echo
+echo f_compiler  /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort;
+echo
+echo f_flags     "-fixed -132 -O0 -override-limits -mp1 -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort";
+echo
+echo c_flags     "-O2 -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include";
+echo
+echo link_flags  "-static-intel -openmp";
+echo
+echo libraries   "-L/mnt/HA/groups/cappsGrp/lib/se_snl -lse_snl -L/mnt/HA/groups/cappsGrp/lib/pario -lpario  -L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/intel64/lib -lmpich -L/mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64mpifort -lioapi -L/mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff";
+echo
+echo global      verbose;
+echo
+set text=// mechanism and tracer:
+echo // mechanism and tracer: mech/cb05cl_ae5_aq, mech/trac0
+echo // project archive: /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+echo
+echo include SUBST_PE_COMM    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/par/PE_COMM.EXT;
+echo include SUBST_CONST      /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/const/CONST.EXT;
+echo include SUBST_FILES_ID   /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/filenames/FILES_CTM.EXT;
+echo include SUBST_EMPR_VD    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.vdif.EXT;
+echo include SUBST_EMPR_CH    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.chem.EXT;
+echo include SUBST_IOPARMS    /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT;
+echo include SUBST_IOFDESC    /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT;
+echo include SUBST_IODECL     /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT;
+echo include SUBST_RXCMMN     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXCM.EXT;
+echo include SUBST_RXDATA     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXDT.EXT;
+echo include SUBST_GC_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SPC.EXT;
+echo include SUBST_GC_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_EMIS.EXT;
+echo include SUBST_GC_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ICBC.EXT;
+echo include SUBST_GC_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DIFF.EXT;
+echo include SUBST_GC_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DDEP.EXT;
+echo include SUBST_GC_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DEPV.EXT;
+echo include SUBST_GC_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ADV.EXT;
+echo include SUBST_GC_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_CONC.EXT;
+echo include SUBST_GC_G2AE    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AE.EXT;
+echo include SUBST_GC_G2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AQ.EXT;
+echo include SUBST_GC_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SCAV.EXT;
+echo include SUBST_GC_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_WDEP.EXT;
+echo include SUBST_AE_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SPC.EXT;
+echo include SUBST_AE_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_EMIS.EXT;
+echo include SUBST_AE_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ICBC.EXT;
+echo include SUBST_AE_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DIFF.EXT;
+echo include SUBST_AE_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DDEP.EXT;
+echo include SUBST_AE_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DEPV.EXT;
+echo include SUBST_AE_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ADV.EXT;
+echo include SUBST_AE_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_CONC.EXT;
+echo include SUBST_AE_A2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_A2AQ.EXT;
+echo include SUBST_AE_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SCAV.EXT;
+echo include SUBST_AE_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_WDEP.EXT;
+echo include SUBST_NR_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SPC.EXT;
+echo include SUBST_NR_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_EMIS.EXT;
+echo include SUBST_NR_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ICBC.EXT;
+echo include SUBST_NR_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DIFF.EXT;
+echo include SUBST_NR_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DDEP.EXT;
+echo include SUBST_NR_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DEPV.EXT;
+echo include SUBST_NR_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ADV.EXT;
+echo include SUBST_NR_N2AE    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AE.EXT;
+echo include SUBST_NR_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_CONC.EXT;
+echo include SUBST_NR_N2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AQ.EXT;
+echo include SUBST_NR_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SCAV.EXT;
+echo include SUBST_NR_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_WDEP.EXT;
+echo include SUBST_TR_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT;
+echo include SUBST_TR_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT;
+echo include SUBST_TR_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT;
+echo include SUBST_TR_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT;
+echo include SUBST_TR_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT;
+echo include SUBST_TR_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT;
+echo include SUBST_TR_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT;
+echo include SUBST_TR_T2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_T2AQ.EXT;
+echo include SUBST_TR_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SCAV.EXT;
+echo include SUBST_TR_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_WDEP.EXT;
+echo
+set text = // Process Analysis / Integrated Reaction Rates processing
+echo // Process Analysis / Integrated Reaction Rates processing
+echo include SUBST_PACTL_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CTL.EXT;
+echo include SUBST_PACMN_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CMN.EXT;
+echo include SUBST_PADAT_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_DAT.EXT;
+echo
+echo // Parallel / Include message passing definitions
+echo include SUBST_MPICH /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/../include/mpif.h ;
+echo
+set text = ctm and ctm_yamo
+echo // options are ctm and ctm_yamo
+echo Module driver/yamo_adj_fwd;
+echo
+echo Module par/par;
+echo
+set text = init and init_yamo
+echo // options are init and init_yamo
+echo Module init/yamo;
+echo
+set text = denrate and adjcon_noop
+echo // options are denrate and adjcon_noop
+echo Module adjcon/adjcon_noop;
+echo
+echo Module couple/gencoor;
+echo
+set text = hppm, hyamo and hadv_noop
+echo // options are hppm, hyamo and hadv_noop
+echo Module hadv/yamo_cadj_fwd;
+echo
+set text = vppm, vyamo and vadv_noop
+echo // options are vppm, vyamo and vadv_noop
+echo Module vadv/vyamo_cadj_fwd;
+echo
+set text = multi_scale and hdiff_noop
+echo // options are multi_scale and hdiff_noop
+echo Module hdiff/multiscale_adj_fwd;
+echo
+set text = eddy, acm2 and vdiff_noop
+echo // options are eddy, acm2 and vdiff_noop
+echo Module vdiff/acm2_inline_adj_fwd;
+echo
+set text = phot_table, phot_sat and phot_inline
+echo // options are phot_table, phot_sat and phot_inline
+echo Module phot/phot_noop;
+echo
+set text = ros3, smvgear, ebi_cb05cl, ebi_cb05cl_ae5, ebi_saprc99, ebi_saprc99_ae5 and chem_noop
+echo // options are ros3, smvgear, ebi_cb05cl, ebi_cb05cl_ae5, ebi_saprc99, ebi_saprc99_ae5 and chem_noop
+echo Module chem/chem_noop;
+echo
+set text = aero4, aero5 and aero_noop
+echo // options are aero4, aero5 and aero_noop
+echo Module aero/aero5_adj_fwd;
+echo
+set text = aero_depv2 and aero_depv_noop
+echo // options are aero_depv2 and aero_depv_noop
+echo Module aero_depv/aero_depv2;
+echo
+set text = cloud_acm, cloud_acm_ae5 and cloud_noop
+echo // options are cloud_acm, cloud_acm_ae5 and cloud_noop
+echo Module cloud/cloud_acm_ae5_fwd;
+echo
+set text = pa and pa_noop, which requires the
+echo // options are pa and pa_noop, which requires the replacement of the three
+set text = // global include files with their pa_noop counterparts
+echo // global include files with their pa_noop counterparts
+echo Module procan/pa;
+echo
+echo Module util/util_adj;
+echo
+echo Module chkpnt/chkpnt_ioapi;
+echo
+if ( 0 ) then
+unalias mv rm
+if ( 1 ) then
+if ( 0 ) then
+/home/cl3293/CMAQ_adj_NH3/cmaq_adj/BLDMAKE_git/bldmake -verbose -makefo cfg.fwd_NH3_org.bld
+REPOROOT set to:/home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+
+Model set to ADJOINT_FWD
+CPP_FLAGS set to   -Dparallel -Dcluster -DINTERPB=PINTERPB -DM3ERR=PM3ERR -DM3EXIT=PM3EXIT -DM3WARN=PM3WARN -DSHUT3=PSHUT3 -DWRITE3=PWRITE3 -DSUBST_MODULES=SE_MODULES -DSUBST_BARRIER=SE_BARRIER -DSUBST_GLOBAL_MAX=SE_GLOBAL_MAX -DSUBST_GLOBAL_MIN=SE_GLOBAL_MIN -DSUBST_GLOBAL_MIN_DATA=SE_GLOBAL_MIN_DATA -DSUBST_GLOBAL_TO_LOCAL_COORD=SE_GLOBAL_TO_LOCAL_COORD -DSUBST_GLOBAL_SUM=SE_GLOBAL_SUM -DSUBST_GLOBAL_LOGICAL=SE_GLOBAL_LOGICAL -DSUBST_LOOP_INDEX=SE_LOOP_INDEX -DSUBST_SUBGRID_INDEX=SE_SUBGRID_INDEX -DSUBST_HI_LO_BND_PE=SE_HI_LO_BND_PE -DSUBST_SUM_CHK=SE_SUM_CHK -DSUBST_INIT_ARRAY=SE_INIT_ARRAY -DSUBST_COMM=SE_COMM -DSUBST_MY_REGION=SE_MY_REGION -DSUBST_SLICE=SE_SLICE -DSUBST_GATHER=SE_GATHER -DSUBST_DATA_COPY=SE_DATA_COPY -DSUBST_IN_SYN=SE_IN_SYN
+F_COMPILER set to /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort
+f_FLAGS set to -fixed -132 -O0 -override-limits -mp1 -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/MOD_DIR -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort
+C_FLAGS set to -O2 -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include
+LINK_FLAGS set to -static-intel -openmp
+LIBRARIES set to -L/mnt/HA/groups/cappsGrp/lib/se_snl -lse_snl -L/mnt/HA/groups/cappsGrp/lib/pario -lpario  -L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/intel64/lib -lmpich -L/mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64mpifort -lioapi -L/mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff
+INCLUDE SUBST_PE_COMM = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/par/PE_COMM.EXT
+INCLUDE SUBST_CONST = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/const/CONST.EXT
+INCLUDE SUBST_FILES_ID = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/filenames/FILES_CTM.EXT
+INCLUDE SUBST_EMPR_VD = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.vdif.EXT
+INCLUDE SUBST_EMPR_CH = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.chem.EXT
+INCLUDE SUBST_IOPARMS = /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT
+INCLUDE SUBST_IOFDESC = /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+INCLUDE SUBST_IODECL = /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+INCLUDE SUBST_RXCMMN = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXCM.EXT
+INCLUDE SUBST_RXDATA = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXDT.EXT
+INCLUDE SUBST_GC_SPC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SPC.EXT
+INCLUDE SUBST_GC_EMIS = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_EMIS.EXT
+INCLUDE SUBST_GC_ICBC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ICBC.EXT
+INCLUDE SUBST_GC_DIFF = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DIFF.EXT
+INCLUDE SUBST_GC_DDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DDEP.EXT
+INCLUDE SUBST_GC_DEPV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DEPV.EXT
+INCLUDE SUBST_GC_ADV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ADV.EXT
+INCLUDE SUBST_GC_CONC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_CONC.EXT
+INCLUDE SUBST_GC_G2AE = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AE.EXT
+INCLUDE SUBST_GC_G2AQ = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AQ.EXT
+INCLUDE SUBST_GC_SCAV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SCAV.EXT
+INCLUDE SUBST_GC_WDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_WDEP.EXT
+INCLUDE SUBST_AE_SPC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SPC.EXT
+INCLUDE SUBST_AE_EMIS = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_EMIS.EXT
+INCLUDE SUBST_AE_ICBC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ICBC.EXT
+INCLUDE SUBST_AE_DIFF = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DIFF.EXT
+INCLUDE SUBST_AE_DDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DDEP.EXT
+INCLUDE SUBST_AE_DEPV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DEPV.EXT
+INCLUDE SUBST_AE_ADV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ADV.EXT
+INCLUDE SUBST_AE_CONC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_CONC.EXT
+INCLUDE SUBST_AE_A2AQ = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_A2AQ.EXT
+INCLUDE SUBST_AE_SCAV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SCAV.EXT
+INCLUDE SUBST_AE_WDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_WDEP.EXT
+INCLUDE SUBST_NR_SPC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SPC.EXT
+INCLUDE SUBST_NR_EMIS = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_EMIS.EXT
+INCLUDE SUBST_NR_ICBC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ICBC.EXT
+INCLUDE SUBST_NR_DIFF = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DIFF.EXT
+INCLUDE SUBST_NR_DDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DDEP.EXT
+INCLUDE SUBST_NR_DEPV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DEPV.EXT
+INCLUDE SUBST_NR_ADV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ADV.EXT
+INCLUDE SUBST_NR_N2AE = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AE.EXT
+INCLUDE SUBST_NR_CONC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_CONC.EXT
+INCLUDE SUBST_NR_N2AQ = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AQ.EXT
+INCLUDE SUBST_NR_SCAV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SCAV.EXT
+INCLUDE SUBST_NR_WDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_WDEP.EXT
+INCLUDE SUBST_TR_SPC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+INCLUDE SUBST_TR_EMIS = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+INCLUDE SUBST_TR_ICBC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT
+INCLUDE SUBST_TR_DIFF = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT
+INCLUDE SUBST_TR_DDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT
+INCLUDE SUBST_TR_DEPV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT
+INCLUDE SUBST_TR_ADV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+INCLUDE SUBST_TR_T2AQ = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_T2AQ.EXT
+INCLUDE SUBST_TR_SCAV = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SCAV.EXT
+INCLUDE SUBST_TR_WDEP = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_WDEP.EXT
+INCLUDE SUBST_PACTL_ID = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CTL.EXT
+INCLUDE SUBST_PACMN_ID = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CMN.EXT
+INCLUDE SUBST_PADAT_ID = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_DAT.EXT
+INCLUDE SUBST_MPICH = /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib
+
+
+Building file list for module driver/yamo_adj_fwd
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/adj_array_mod.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/ADJOINT_FILES.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/advstep.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/AVG_CONC.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/CGRID_SPCS.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/driver_fwd.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/GRID_CONF.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/hcontvel.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/HGRD_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/hveloc.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/PCGRID_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/readconf.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/sciproc.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/STD_CONC.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/syncstep.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/VGRD_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/wr_aconc.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/wr_cgrid.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/wr_conc.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/driver/yamo_adj_fwd/WVEL_DEFN.F added to make list
+
+
+Building file list for module par/par
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/par/par/distr_env.c added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/par/par/par_init.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/par/par/par_term.F added to make list
+
+
+Building file list for module init/yamo
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/init/yamo/diffmsg.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/init/yamo/flcheck.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/init/yamo/grdcheck.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/init/yamo/initscen.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/init/yamo/load_cgrid.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/init/yamo/opconc.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/init/yamo/setup_logdev.F added to make list
+
+
+Building file list for module adjcon/adjcon_noop
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/adjcon/adjcon_noop/adjadv_noop.F added to make list
+
+
+Building file list for module couple/gencoor
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/couple/gencoor/couple.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/couple/gencoor/ppmv_msmr.F added to make list
+
+
+Building file list for module hadv/yamo_cadj_fwd
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hadv/yamo_cadj_fwd/advbc_map.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hadv/yamo_cadj_fwd/hadv.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hadv/yamo_cadj_fwd/hppm.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hadv/yamo_cadj_fwd/rdbcon.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hadv/yamo_cadj_fwd/xadv.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hadv/yamo_cadj_fwd/yadv.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hadv/yamo_cadj_fwd/zfdbc.f added to make list
+
+
+Building file list for module vadv/vyamo_cadj_fwd
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vadv/vyamo_cadj_fwd/vppm.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vadv/vyamo_cadj_fwd/zadvyppm.F added to make list
+
+
+Building file list for module hdiff/multiscale_adj_fwd
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hdiff/multiscale_adj_fwd/deform.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hdiff/multiscale_adj_fwd/hcdiff3d.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hdiff/multiscale_adj_fwd/hdiff.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/hdiff/multiscale_adj_fwd/rho_j.F added to make list
+
+
+Building file list for module vdiff/acm2_inline_adj_fwd
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/AERO_EMIS.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/beis3.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/BEIS_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/BIOG_EMIS.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/cgrid_depv.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/checkmem.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/chkgrid.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/conv_cgrid.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/czangle.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/delta_zs.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/DEPV_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/DEPVVARS.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/eddyx.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/EMIS_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/fire_plmris.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/gas_depv_map.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/getfline.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/getparb.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/hrno.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/m3dry.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/matrix.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/opddep.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/opdepv_diag.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/opemis.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/openlayout.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/opmet.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/oppt3d_diag.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/opssemis.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/parsline.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/plmris.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/plsprd.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/PMEM_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/preplm.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/PT3D_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/PTBILIN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/PTMAP.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/PTMET.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/rddepv.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/rdmet.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/ssemis.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/STK_EMIS.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/STK_PRMS.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/tmpbeis.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/tri.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/UDTYPES.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/ungridb2.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/vdiffacm2.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/VDIFF_MAP.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/wrdaymsg.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/vdiff/acm2_inline_adj_fwd/write3_distr.f added to make list
+
+
+Building file list for module phot/phot_noop
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/phot/phot_noop/phot_noop.F added to make list
+
+
+Building file list for module chem/chem_noop
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/chem/chem_noop/chem_noop.F added to make list
+
+
+Building file list for module aero/aero5_adj_fwd
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/AERO_DATA.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/aero_driver.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/aero_subs.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/coags.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/getpar.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/hetchem.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/isoropiaIIcode_adj.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/isrpia_adj.inc added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/MET_DATA.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/opdiam.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/opvis.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/PRECURSOR_DATA.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero/aero5_adj_fwd/SOA_DEFN.F added to make list
+
+
+Building file list for module aero_depv/aero_depv2
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/aero_depv/aero_depv2/aero_depv.F added to make list
+
+
+Building file list for module cloud/cloud_acm_ae5_fwd
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/acmcld.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Function.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Global.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Initialize.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Integrator.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Jacobian.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_JacobianSP.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_kpp.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_LinearAlgebra.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Model.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Parameters.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Precision.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aqchem_Rates.F90 added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/AQ_DATA.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/aq_map.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/cldproc_acm.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/convcld_acm.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/getalpha.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/hlconst.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/indexn.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/rescld.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/scavwdep.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/cloud/cloud_acm_ae5_fwd/set_aeconcmin.F added to make list
+
+
+Building file list for module procan/pa
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/procan/pa/PAGRD_DEFN.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/procan/pa/pa_init.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/procan/pa/pa_irr_ctl.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/procan/pa/pa_irr.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/procan/pa/pa_mkhdr.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/procan/pa/pa_output.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/procan/pa/pa_update.F added to make list
+
+
+Building file list for module util/util_adj
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/adBuffer.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/adStack.c added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/cksummer.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/findex.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/get_envlist.f added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/lstepf.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/subhdomain.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/util/util_adj/subhfile.F added to make list
+
+
+Building file list for module chkpnt/chkpnt_ioapi
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/chkpnt/chkpnt_ioapi/CHK_FILES_DEFS.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/chkpnt/chkpnt_ioapi/CHK_FILES.F added to make list
+  file /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/chkpnt/chkpnt_ioapi/CHK_FILES_IMPL.F added to make list
+
+Determining global module files
+  file adj_array_mod.f determined to be global
+  file CGRID_SPCS.F determined to be global
+  file GRID_CONF.F determined to be global
+  file HGRD_DEFN.F determined to be global
+  file STD_CONC.F determined to be global
+  file VGRD_DEFN.F determined to be global
+  file WVEL_DEFN.F determined to be global
+  file AERO_EMIS.F determined to be global
+  file EMIS_DEFN.F determined to be global
+  file PMEM_DEFN.F determined to be global
+  file AERO_DATA.F determined to be global
+  file PAGRD_DEFN.F determined to be global
+  file CHK_FILES_DEFS.F determined to be global
+  file CHK_FILES.F determined to be global
+  file PT3D_DEFN.F determined to be global
+  file PTMAP.F determined to be global
+  file BEIS_DEFN.F determined to be global
+  file BIOG_EMIS.F determined to be global
+  file PTBILIN.F determined to be global
+  file PTMET.F determined to be global
+  file STK_EMIS.F determined to be global
+  file STK_PRMS.F determined to be global
+  file UDTYPES.F determined to be global
+  file MET_DATA.F determined to be global
+  file CHK_FILES_IMPL.F determined to be global
+
+Generating Makefile
+
+  Compilers defined
+  CPP Flags defined
+  Libraries defined
+  Includes defined
+  Objects defined
+  Make rules defined
+  
+  
+ file,nfields-1 ADJOINT_FILES.F            5
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            4 PMEM_DEFN  PMEM_DEFN.F
+ modName,modFile            5 EMIS_DEFN  EMIS_DEFN.F
+  
+ file,nfields-1 advstep.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+  
+ file,nfields-1 AVG_CONC.F            2
+ modName,modFile            2 VGRD_DEFN  VGRD_DEFN.F
+  
+  
+ file,nfields-1 driver_fwd.F           10
+ modName,modFile            2 PCGRID_DEFN  PCGRID_DEFN.F
+ modName,modFile            3 VGRD_DEFN  VGRD_DEFN.F
+ modName,modFile            4 WVEL_DEFN  WVEL_DEFN.F
+ modName,modFile            5 STD_CONC  STD_CONC.F
+ modName,modFile            6 AVG_CONC  AVG_CONC.F
+ modName,modFile            7 ADJOINT_FILES  ADJOINT_FILES.F
+ modName,modFile            8 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            9 CHK_FILES  CHK_FILES.F
+ modName,modFile           10 ADJ_ARRAY_MOD  adj_array_mod.f
+  
+ file,nfields-1 GRID_CONF.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 VGRD_DEFN  VGRD_DEFN.F
+  
+ file,nfields-1 hcontvel.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+  
+  
+ file,nfields-1 hveloc.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+  
+ file,nfields-1 PCGRID_DEFN.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+  
+  
+ file,nfields-1 sciproc.F            2
+ modName,modFile            2 ADJ_ARRAY_MOD  adj_array_mod.f
+  
+ file,nfields-1 STD_CONC.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 VGRD_DEFN  VGRD_DEFN.F
+  
+ file,nfields-1 syncstep.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+  
+  
+ file,nfields-1 wr_aconc.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 AVG_CONC  AVG_CONC.F
+ modName                    4 SUBST_MODULES  -------------
+  
+ file,nfields-1 wr_cgrid.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName                    4 SUBST_MODULES  -------------
+  
+ file,nfields-1 wr_conc.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 STD_CONC  STD_CONC.F
+ modName,modFile            4 WVEL_DEFN  WVEL_DEFN.F
+  
+ file,nfields-1 WVEL_DEFN.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+  
+ file,nfields-1 par_init.F            5
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 PAGRD_DEFN  PAGRD_DEFN.F
+ modName                    4 SUBST_MODULES  -------------
+ modName                    5 SWAP_SANDIA  -------------
+  
+  
+  
+  
+ file,nfields-1 grdcheck.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 initscen.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName                    3 SUBST_MODULES  -------------
+  
+ file,nfields-1 load_cgrid.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 opconc.F            5
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 WVEL_DEFN  WVEL_DEFN.F
+ modName,modFile            4 STD_CONC  STD_CONC.F
+ modName                    5 SUBST_MODULES  -------------
+  
+  
+  
+ file,nfields-1 couple.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 ppmv_msmr.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+  
+ file,nfields-1 hadv.F            6
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName,modFile            4 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            5 CHK_FILES  CHK_FILES.F
+ modName                    6 SUBST_MODULES  -------------
+  
+ file,nfields-1 hppm.F            2
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+  
+ file,nfields-1 rdbcon.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 xadv.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName                    4 SWAP_SANDIA  -------------
+  
+ file,nfields-1 yadv.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName                    4 SWAP_SANDIA  -------------
+  
+  
+  
+ file,nfields-1 zadvyppm.F            6
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName,modFile            4 WVEL_DEFN  WVEL_DEFN.F
+ modName,modFile            5 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            6 CHK_FILES  CHK_FILES.F
+  
+ file,nfields-1 deform.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+ modName                    4 SWAP_SANDIA  -------------
+  
+ file,nfields-1 hcdiff3d.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+  
+ file,nfields-1 hdiff.F            5
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName                    4 SUBST_MODULES  -------------
+ modName                    5 SWAP_SANDIA  -------------
+  
+ file,nfields-1 rho_j.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 AERO_EMIS.F            7
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 PT3D_DEFN  PT3D_DEFN.F
+ modName,modFile            4 PMEM_DEFN  PMEM_DEFN.F
+ modName,modFile            5 PTMAP  PTMAP.F
+ modName                    6 SUBST_MODULES  -------------
+ modName,modFile            7 ADJ_ARRAY_MOD  adj_array_mod.f
+  
+ file,nfields-1 beis3.f            2
+ modName,modFile            2 BIOG_EMIS  BIOG_EMIS.F
+  
+ file,nfields-1 BEIS_DEFN.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 BIOG_EMIS  BIOG_EMIS.F
+  
+  
+ file,nfields-1 cgrid_depv.F            2
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+  
+  
+  
+ file,nfields-1 conv_cgrid.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+  
+  
+  
+ file,nfields-1 DEPV_DEFN.F            5
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 DEPVVARS  DEPVVARS.F
+ modName,modFile            4 GRID_CONF  GRID_CONF.F
+ modName,modFile            5 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 DEPVVARS.F            2
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+  
+ file,nfields-1 eddyx.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+  
+ file,nfields-1 EMIS_DEFN.F            9
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 ADJ_ARRAY_MOD  adj_array_mod.f
+ modName,modFile            4 BEIS_DEFN  BEIS_DEFN.F
+ modName,modFile            5 PT3D_DEFN  PT3D_DEFN.F
+ modName,modFile            6 PMEM_DEFN  PMEM_DEFN.F
+ modName,modFile            7 AERO_EMIS  AERO_EMIS.F
+ modName,modFile            8 BIOG_EMIS  BIOG_EMIS.F
+ modName,modFile            9 PTMAP  PTMAP.F
+  
+  
+ file,nfields-1 gas_depv_map.F            2
+ modName,modFile            2 DEPVVARS  DEPVVARS.F
+  
+  
+  
+ file,nfields-1 hrno.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 BIOG_EMIS  BIOG_EMIS.F
+  
+ file,nfields-1 m3dry.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 DEPVVARS  DEPVVARS.F
+  
+ file,nfields-1 matrix.F            2
+ modName,modFile            2 VGRD_DEFN  VGRD_DEFN.F
+  
+ file,nfields-1 opddep.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 opdepv_diag.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 DEPVVARS  DEPVVARS.F
+  
+ file,nfields-1 opemis.F            2
+ modName,modFile            2 VGRD_DEFN  VGRD_DEFN.F
+  
+ file,nfields-1 openlayout.F            2
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+  
+  
+ file,nfields-1 oppt3d_diag.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 opssemis.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 AERO_EMIS  AERO_EMIS.F
+  
+  
+  
+  
+ file,nfields-1 PMEM_DEFN.F            2
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+  
+  
+ file,nfields-1 PT3D_DEFN.F           11
+ modName,modFile            2 UDTYPES  UDTYPES.F
+ modName,modFile            3 GRID_CONF  GRID_CONF.F
+ modName,modFile            4 STK_PRMS  STK_PRMS.F
+ modName,modFile            5 STK_EMIS  STK_EMIS.F
+ modName,modFile            6 PMEM_DEFN  PMEM_DEFN.F
+ modName,modFile            7 PTMET  PTMET.F
+ modName,modFile            8 PTBILIN  PTBILIN.F
+ modName,modFile            9 PTMAP  PTMAP.F
+ modName                   10 SUBST_MODULES  -------------
+ modName,modFile           11 VGRD_DEFN  VGRD_DEFN.F
+  
+ file,nfields-1 PTBILIN.F            5
+ modName,modFile            2 UDTYPES  UDTYPES.F
+ modName,modFile            3 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            4 VGRD_DEFN  VGRD_DEFN.F
+ modName,modFile            5 STK_PRMS  STK_PRMS.F
+  
+ file,nfields-1 PTMAP.F            4
+ modName,modFile            2 UDTYPES  UDTYPES.F
+ modName,modFile            3 STK_EMIS  STK_EMIS.F
+ modName,modFile            4 PMEM_DEFN  PMEM_DEFN.F
+  
+ file,nfields-1 PTMET.F            5
+ modName,modFile            2 UDTYPES  UDTYPES.F
+ modName,modFile            3 STK_PRMS  STK_PRMS.F
+ modName,modFile            4 PTBILIN  PTBILIN.F
+ modName,modFile            5 VGRD_DEFN  VGRD_DEFN.F
+  
+ file,nfields-1 rddepv.F            2
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+  
+ file,nfields-1 rdmet.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 ssemis.F            2
+ modName,modFile            2 AERO_EMIS  AERO_EMIS.F
+  
+ file,nfields-1 STK_EMIS.F            2
+ modName,modFile            2 UDTYPES  UDTYPES.F
+  
+ file,nfields-1 STK_PRMS.F            3
+ modName,modFile            2 UDTYPES  UDTYPES.F
+ modName,modFile            3 HGRD_DEFN  HGRD_DEFN.F
+  
+ file,nfields-1 tmpbeis.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 BIOG_EMIS  BIOG_EMIS.F
+  
+ file,nfields-1 tri.F            2
+ modName,modFile            2 VGRD_DEFN  VGRD_DEFN.F
+  
+  
+ file,nfields-1 ungridb2.f            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 PTBILIN  PTBILIN.F
+  
+ file,nfields-1 vdiffacm2.F            6
+ modName,modFile            2 EMIS_DEFN  EMIS_DEFN.F
+ modName,modFile            3 DEPV_DEFN  DEPV_DEFN.F
+ modName,modFile            4 VDIFF_MAP  VDIFF_MAP.F
+ modName,modFile            5 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            6 CHK_FILES  CHK_FILES.F
+  
+ file,nfields-1 VDIFF_MAP.F            3
+ modName,modFile            2 CGRID_SPCS  CGRID_SPCS.F
+ modName,modFile            3 AERO_EMIS  AERO_EMIS.F
+  
+  
+  
+ file,nfields-1 phot_noop.F            3
+ modName,modFile            2 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            3 VGRD_DEFN  VGRD_DEFN.F
+  
+  
+ file,nfields-1 AERO_DATA.F            3
+ modName,modFile            2 CGRID_SPCS  CGRID_SPCS.F
+ modName,modFile            3 MET_DATA  MET_DATA.F
+  
+ file,nfields-1 aero_driver.F            9
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName,modFile            4 AERO_DATA  AERO_DATA.F
+ modName,modFile            5 PRECURSOR_DATA  PRECURSOR_DATA.F
+ modName,modFile            6 SOA_DEFN  SOA_DEFN.F
+ modName,modFile            7 MET_DATA  MET_DATA.F
+ modName,modFile            8 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            9 CHK_FILES  CHK_FILES.F
+  
+ file,nfields-1 aero_subs.f            5
+ modName,modFile            2 SOA_DEFN  SOA_DEFN.F
+ modName,modFile            3 AERO_DATA  AERO_DATA.F
+ modName,modFile            4 MET_DATA  MET_DATA.F
+ modName,modFile            5 PRECURSOR_DATA  PRECURSOR_DATA.F
+  
+  
+ file,nfields-1 getpar.f            3
+ modName,modFile            2 AERO_DATA  AERO_DATA.F
+ modName,modFile            3 MET_DATA  MET_DATA.F
+  
+ file,nfields-1 hetchem.f            4
+ modName,modFile            2 AERO_DATA  AERO_DATA.F
+ modName,modFile            3 PRECURSOR_DATA  PRECURSOR_DATA.F
+ modName,modFile            4 MET_DATA  MET_DATA.F
+  
+  
+  
+  
+ file,nfields-1 opdiam.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 opvis.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 PRECURSOR_DATA.F            3
+ modName,modFile            2 CGRID_SPCS  CGRID_SPCS.F
+ modName,modFile            3 MET_DATA  MET_DATA.F
+  
+ file,nfields-1 SOA_DEFN.F            4
+ modName,modFile            2 AERO_DATA  AERO_DATA.F
+ modName,modFile            3 MET_DATA  MET_DATA.F
+ modName,modFile            4 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 aero_depv.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+  
+  
+ file,nfields-1 aqchem_Function.F90            2
+ modName,modFile            2 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+  
+ file,nfields-1 aqchem_Global.F90            2
+ modName,modFile            2 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+  
+ file,nfields-1 aqchem_Initialize.F90            4
+ modName,modFile            2 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+ modName,modFile            3 AQCHEM_GLOBAL  aqchem_Global.F90
+ modName,modFile            4 AQ_DATA  AQ_DATA.F
+  
+ file,nfields-1 aqchem_Integrator.F90            7
+ modName,modFile            2 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+ modName,modFile            3 AQCHEM_GLOBAL  aqchem_Global.F90
+ modName,modFile            4 AQCHEM_LINEARALGEBRA  aqchem_LinearAlgebra.F90
+ modName,modFile            5 AQCHEM_FUNCTION  aqchem_Function.F90
+ modName,modFile            6 AQCHEM_RATES  aqchem_Rates.F90
+ modName,modFile            7 AQCHEM_JACOBIAN  aqchem_Jacobian.F90
+  
+ file,nfields-1 aqchem_Jacobian.F90            3
+ modName,modFile            2 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+ modName,modFile            3 AQCHEM_JACOBIANSP  aqchem_JacobianSP.F90
+  
+  
+ file,nfields-1 aqchem_kpp.F90            4
+ modName,modFile            2 AQ_DATA  AQ_DATA.F
+ modName,modFile            3 AQCHEM_MODEL  aqchem_Model.F90
+ modName,modFile            4 AQCHEM_INITIALIZE  aqchem_Initialize.F90
+  
+ file,nfields-1 aqchem_LinearAlgebra.F90            3
+ modName,modFile            2 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+ modName,modFile            3 AQCHEM_JACOBIANSP  aqchem_JacobianSP.F90
+  
+ file,nfields-1 aqchem_Model.F90            9
+ modName,modFile            2 AQCHEM_PRECISION  aqchem_Precision.F90
+ modName,modFile            3 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+ modName,modFile            4 AQCHEM_GLOBAL  aqchem_Global.F90
+ modName,modFile            5 AQCHEM_FUNCTION  aqchem_Function.F90
+ modName,modFile            6 AQCHEM_INTEGRATOR  aqchem_Integrator.F90
+ modName,modFile            7 AQCHEM_RATES  aqchem_Rates.F90
+ modName,modFile            8 AQCHEM_JACOBIAN  aqchem_Jacobian.F90
+ modName,modFile            9 AQCHEM_LINEARALGEBRA  aqchem_LinearAlgebra.F90
+  
+ file,nfields-1 aqchem_Parameters.F90            2
+ modName,modFile            2 AQCHEM_PRECISION  aqchem_Precision.F90
+  
+  
+ file,nfields-1 aqchem_Rates.F90            3
+ modName,modFile            2 AQCHEM_PARAMETERS  aqchem_Parameters.F90
+ modName,modFile            3 AQCHEM_GLOBAL  aqchem_Global.F90
+  
+ file,nfields-1 AQ_DATA.F            4
+ modName,modFile            2 AERO_DATA  AERO_DATA.F
+ modName,modFile            3 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            4 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 aq_map.F            4
+ modName,modFile            2 CGRID_SPCS  CGRID_SPCS.F
+ modName,modFile            3 AQ_DATA  AQ_DATA.F
+ modName,modFile            4 AERO_DATA  AERO_DATA.F
+  
+ file,nfields-1 cldproc_acm.F            6
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName                    4 SUBST_MODULES  -------------
+ modName,modFile            5 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            6 CHK_FILES  CHK_FILES.F
+  
+ file,nfields-1 convcld_acm.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 getalpha.f            2
+ modName,modFile            2 AERO_DATA  AERO_DATA.F
+  
+  
+  
+ file,nfields-1 rescld.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 scavwdep.F            2
+ modName,modFile            2 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 set_aeconcmin.F            2
+ modName,modFile            2 CGRID_SPCS  CGRID_SPCS.F
+  
+ file,nfields-1 PAGRD_DEFN.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName                    3 SUBST_MODULES  -------------
+  
+ file,nfields-1 pa_init.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 PAGRD_DEFN  PAGRD_DEFN.F
+ modName                    4 SUBST_MODULES  -------------
+  
+ file,nfields-1 pa_irr_ctl.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 PAGRD_DEFN  PAGRD_DEFN.F
+  
+ file,nfields-1 pa_irr.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+ file,nfields-1 pa_mkhdr.F            3
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 PAGRD_DEFN  PAGRD_DEFN.F
+  
+ file,nfields-1 pa_output.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 PAGRD_DEFN  PAGRD_DEFN.F
+ modName                    4 SUBST_MODULES  -------------
+  
+ file,nfields-1 pa_update.F            4
+ modName,modFile            2 PAGRD_DEFN  PAGRD_DEFN.F
+ modName                    3 SUBST_MODULES  -------------
+ modName,modFile            4 AERO_EMIS  AERO_EMIS.F
+  
+  
+  
+ file,nfields-1 cksummer.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CGRID_SPCS  CGRID_SPCS.F
+ modName                    4 SUBST_MODULES  -------------
+  
+  
+  
+  
+  
+ file,nfields-1 subhfile.F            2
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+  
+  
+ file,nfields-1 CHK_FILES.F            4
+ modName,modFile            2 GRID_CONF  GRID_CONF.F
+ modName,modFile            3 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            4 CHK_FILES_IMPL  CHK_FILES_IMPL.F
+  
+ file,nfields-1 CHK_FILES_IMPL.F            5
+ modName,modFile            2 CHK_FILES_DEFS  CHK_FILES_DEFS.F
+ modName,modFile            3 HGRD_DEFN  HGRD_DEFN.F
+ modName,modFile            4 VGRD_DEFN  VGRD_DEFN.F
+ modName                    5 SUBST_MODULES  -------------
+  USE/MODULE dependencies defined
+
+Makefile generated
+endif
+else
+mv Makefile Makefile.intel
+if ( -e Makefile.intel && -e Makefile ) rm Makefile
+ln -s Makefile.intel Makefile
+if ( 0 != 0 ) then
+if ( -e /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/cfg.fwd_NH3_org ) then
+mv cfg.fwd_NH3_org.bld /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/cfg.fwd_NH3_org
+cd /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+set brnch = `git branch`
+git branch
+@ i = 0
+while ( 0 < 3 )
+@ i++
+if ( master == * ) @ l = 1 + 1
+end
+while ( 1 < 3 )
+@ i++
+if ( * == * ) @ l = 2 + 1
+@ l = 2 + 1
+end
+while ( 2 < 3 )
+@ i++
+if ( test == * ) @ l = 3 + 1
+end
+while ( 3 < 3 )
+set rep = `echo $cwd | tr "/" "#"`
+echo /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+tr / #
+set rln = repo:#home#cl3293#CMAQ_adj_NH3#cmaq_adj#CCTM,branch:test,compiler:intel
+set ref = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/repo:#home#cl3293#CMAQ_adj_NH3#cmaq_adj#CCTM,branch:test,compiler:intel
+/bin/touch /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org/repo:#home#cl3293#CMAQ_adj_NH3#cmaq_adj#CCTM,branch:test,compiler:intel
+if ( -d /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/branch ) /bin/cp /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM/branch/branch.* /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3_org
+exit

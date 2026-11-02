@@ -1,0 +1,723 @@
+#   Makefile generated using program [bldmake]
+#
+#   Generation date [01/22/2020  23:43:52]
+#   Configuration file [cfg.fwd_NH3.bld]
+#   Using GIT repository
+#
+
+MODEL = ADJOINT_FWD
+
+FC = /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort
+CC = /opt/mellanox/openshmem/2.2/bin/mpicc
+
+f_FLAGS    = -extend-source 132 -traceback -O0 -override-limits -mp1 -fp-model precise -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3/MOD_DIR  -I. -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I. -I /mnt/HA/opt/ioapi/intel/2015/3.2/lib
+#f_FLAGS    = -extend-source 132 -g -traceback -check all -check bounds -check uninit -ftrapuv -debug all -fpe-all=3 -O0 -override-limits -mp1 -fp-model precise -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3/MOD_DIR  -I. -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I. -I /mnt/HA/opt/ioapi/intel/2015/3.2/lib
+F_FLAGS    = $(f_FLAGS)
+f90_FLAGS  = -free -traceback -O0 -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3/MOD_DIR  -I. -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I. -I /mnt/HA/opt/ioapi/intel/2015/3.2/lib
+F90_FLAGS  = $(f90_FLAGS)
+C_FLAGS    = -O2 -DFLDMN -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include
+
+LINKER     = $(FC)
+LINK_FLAGS = -static-intel -openmp
+
+REPOROOT = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+
+CPP = $(FC)
+CPP_FLAGS = \
+  -Dparallel \
+  -Dcluster \
+  -DIncl \
+  -DINTERPB=PINTERPB \
+  -DM3ERR=PM3ERR \
+  -DM3EXIT=PM3EXIT \
+  -DM3WARN=PM3WARN \
+  -DSHUT3=PSHUT3 \
+  -DWRITE3=PWRITE3 \
+  -DSUBST_MODULES=SE_MODULES \
+  -DSUBST_BARRIER=SE_BARRIER \
+  -DSUBST_GLOBAL_MAX=SE_GLOBAL_MAX \
+  -DSUBST_GLOBAL_MIN=SE_GLOBAL_MIN \
+  -DSUBST_GLOBAL_MIN_DATA=SE_GLOBAL_MIN_DATA \
+  -DSUBST_GLOBAL_TO_LOCAL_COORD=SE_GLOBAL_TO_LOCAL_COORD \
+  -DSUBST_GLOBAL_SUM=SE_GLOBAL_SUM \
+  -DSUBST_GLOBAL_LOGICAL=SE_GLOBAL_LOGICAL \
+  -DSUBST_LOOP_INDEX=SE_LOOP_INDEX \
+  -DSUBST_SUBGRID_INDEX=SE_SUBGRID_INDEX \
+  -DSUBST_HI_LO_BND_PE=SE_HI_LO_BND_PE \
+  -DSUBST_SUM_CHK=SE_SUM_CHK \
+  -DSUBST_INIT_ARRAY=SE_INIT_ARRAY \
+  -DSUBST_COMM=SE_COMM \
+  -DSUBST_MY_REGION=SE_MY_REGION \
+  -DSUBST_SLICE=SE_SLICE \
+  -DSUBST_GATHER=SE_GATHER \
+  -DSUBST_DATA_COPY=SE_DATA_COPY \
+  -DSUBST_IN_SYN=SE_IN_SYN
+
+SE_SNL =  -L/mnt/HA/groups/cappsGrp/lib/se_snl -lse_snl
+PARIO =  -L/mnt/HA/groups/cappsGrp/lib/pario -lpario
+MPICH =  -L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi
+IOAPI =  -L /mnt/HA/opt/ioapi/intel/2015/3.2/lib -lioapi #/mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort -lioapi
+NETCDF =  -L/mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff
+
+LIBRARIES = $(SE_SNL) $(PARIO) $(MPICH) $(IOAPI) $(NETCDF)
+
+BASE_INC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed
+MECH_INC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq
+PA_INC = /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop
+
+INCLUDES =  \
+  -DSUBST_PE_COMM=\"$(BASE_INC)/par/PE_COMM.EXT\" \
+  -DSUBST_CONST=\"$(BASE_INC)/const/CONST.EXT\" \
+  -DSUBST_FILES_ID=\"$(BASE_INC)/filenames/FILES_CTM.EXT\" \
+  -DSUBST_EMPR_VD=\"$(BASE_INC)/emctrl/EMISPRM.vdif.EXT\" \
+  -DSUBST_EMPR_CH=\"$(BASE_INC)/emctrl/EMISPRM.chem.EXT\" \
+  -DSUBST_IOPARMS=\"/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT\" \
+  -DSUBST_IOFDESC=\"/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT\" \
+  -DSUBST_IODECL=\"/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT\" \
+  -DSUBST_RXCMMN=\"$(MECH_INC)/RXCM.EXT\" \
+  -DSUBST_RXDATA=\"$(MECH_INC)/RXDT.EXT\" \
+  -DSUBST_GC_SPC=\"$(MECH_INC)/GC_SPC.EXT\" \
+  -DSUBST_GC_EMIS=\"$(MECH_INC)/GC_EMIS.EXT\" \
+  -DSUBST_GC_ICBC=\"$(MECH_INC)/GC_ICBC.EXT\" \
+  -DSUBST_GC_DIFF=\"$(MECH_INC)/GC_DIFF.EXT\" \
+  -DSUBST_GC_DDEP=\"$(MECH_INC)/GC_DDEP.EXT\" \
+  -DSUBST_GC_DEPV=\"$(MECH_INC)/GC_DEPV.EXT\" \
+  -DSUBST_GC_ADV=\"$(MECH_INC)/GC_ADV.EXT\" \
+  -DSUBST_GC_CONC=\"$(MECH_INC)/GC_CONC.EXT\" \
+  -DSUBST_GC_G2AE=\"$(MECH_INC)/GC_G2AE.EXT\" \
+  -DSUBST_GC_G2AQ=\"$(MECH_INC)/GC_G2AQ.EXT\" \
+  -DSUBST_GC_SCAV=\"$(MECH_INC)/GC_SCAV.EXT\" \
+  -DSUBST_GC_WDEP=\"$(MECH_INC)/GC_WDEP.EXT\" \
+  -DSUBST_AE_SPC=\"$(MECH_INC)/AE_SPC.EXT\" \
+  -DSUBST_AE_EMIS=\"$(MECH_INC)/AE_EMIS.EXT\" \
+  -DSUBST_AE_ICBC=\"$(MECH_INC)/AE_ICBC.EXT\" \
+  -DSUBST_AE_DIFF=\"$(MECH_INC)/AE_DIFF.EXT\" \
+  -DSUBST_AE_DDEP=\"$(MECH_INC)/AE_DDEP.EXT\" \
+  -DSUBST_AE_DEPV=\"$(MECH_INC)/AE_DEPV.EXT\" \
+  -DSUBST_AE_ADV=\"$(MECH_INC)/AE_ADV.EXT\" \
+  -DSUBST_AE_CONC=\"$(MECH_INC)/AE_CONC.EXT\" \
+  -DSUBST_AE_A2AQ=\"$(MECH_INC)/AE_A2AQ.EXT\" \
+  -DSUBST_AE_SCAV=\"$(MECH_INC)/AE_SCAV.EXT\" \
+  -DSUBST_AE_WDEP=\"$(MECH_INC)/AE_WDEP.EXT\" \
+  -DSUBST_NR_SPC=\"$(MECH_INC)/NR_SPC.EXT\" \
+  -DSUBST_NR_EMIS=\"$(MECH_INC)/NR_EMIS.EXT\" \
+  -DSUBST_NR_ICBC=\"$(MECH_INC)/NR_ICBC.EXT\" \
+  -DSUBST_NR_DIFF=\"$(MECH_INC)/NR_DIFF.EXT\" \
+  -DSUBST_NR_DDEP=\"$(MECH_INC)/NR_DDEP.EXT\" \
+  -DSUBST_NR_DEPV=\"$(MECH_INC)/NR_DEPV.EXT\" \
+  -DSUBST_NR_ADV=\"$(MECH_INC)/NR_ADV.EXT\" \
+  -DSUBST_NR_N2AE=\"$(MECH_INC)/NR_N2AE.EXT\" \
+  -DSUBST_NR_CONC=\"$(MECH_INC)/NR_CONC.EXT\" \
+  -DSUBST_NR_N2AQ=\"$(MECH_INC)/NR_N2AQ.EXT\" \
+  -DSUBST_NR_SCAV=\"$(MECH_INC)/NR_SCAV.EXT\" \
+  -DSUBST_NR_WDEP=\"$(MECH_INC)/NR_WDEP.EXT\" \
+  -DSUBST_TR_SPC=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT\" \
+  -DSUBST_TR_EMIS=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT\" \
+  -DSUBST_TR_ICBC=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT\" \
+  -DSUBST_TR_DIFF=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT\" \
+  -DSUBST_TR_DDEP=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT\" \
+  -DSUBST_TR_DEPV=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT\" \
+  -DSUBST_TR_ADV=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT\" \
+  -DSUBST_TR_T2AQ=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_T2AQ.EXT\" \
+  -DSUBST_TR_SCAV=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SCAV.EXT\" \
+  -DSUBST_TR_WDEP=\"/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_WDEP.EXT\" \
+  -DSUBST_PACTL_ID=\"$(PA_INC)/PA_CTL.EXT\" \
+  -DSUBST_PACMN_ID=\"$(PA_INC)/PA_CMN.EXT\" \
+  -DSUBST_PADAT_ID=\"$(PA_INC)/PA_DAT.EXT\" \
+  -DSUBST_MPICH=\"/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include/mpif.h\"
+
+GLOBAL_MODULES = \
+  adj_array_mod.o \
+  CGRID_SPCS.o \
+  HGRD_DEFN.o \
+  VGRD_DEFN.o \
+  STD_CONC.o \
+  GRID_CONF.o \
+  WVEL_DEFN.o \
+  PMEM_DEFN.o \
+  BIOG_EMIS.o \
+  BEIS_DEFN.o \
+  UDTYPES.o \
+  STK_EMIS.o \
+  STK_PRMS.o \
+  PTMAP.o \
+  PTBILIN.o \
+  PTMET.o \
+  PT3D_DEFN.o \
+  AERO_EMIS.o \
+  EMIS_DEFN.o \
+  MET_DATA.o \
+  PRECURSOR_DATA.o \
+  AERO_DATA.o \
+  PAGRD_DEFN.o \
+  CHK_FILES_DEFS.o \
+  CHK_FILES_IMPL.o \
+  CHK_FILES.o \
+  NH3_OFFLINE_FILE.o
+
+DRIVER = \
+  ADJOINT_FILES.o \
+  AVG_CONC.o \
+  PCGRID_DEFN.o \
+  advstep.o \
+  driver_fwd.o \
+  hcontvel.o \
+  hveloc.o \
+  readconf.o \
+  sciproc.o \
+  syncstep.o \
+  wr_aconc.o \
+  wr_cgrid.o \
+  wr_conc.o
+
+PAR = \
+  distr_env.o \
+  par_init.o \
+  par_term.o
+
+INIT = \
+  diffmsg.o \
+  flcheck.o \
+  grdcheck.o \
+  initscen.o \
+  load_cgrid.o \
+  opconc.o \
+  setup_logdev.o
+
+ADJCON = \
+  adjadv_noop.o
+
+COUPLE = \
+  couple.o \
+  ppmv_msmr.o
+
+HADV = \
+  advbc_map.o \
+  hadv.o \
+  hppm.o \
+  rdbcon.o \
+  xadv.o \
+  yadv.o \
+  zfdbc.o
+
+VADV = \
+  vppm.o \
+  zadvyppm.o
+
+HDIFF = \
+  deform.o \
+  hcdiff3d.o \
+  hdiff.o \
+  rho_j.o
+
+VDIFF = \
+  DEPVVARS.o \
+  DEPV_DEFN.o \
+  VDIFF_MAP.o \
+  beis3.o \
+  cgrid_depv.o \
+  checkmem.o \
+  chkgrid.o \
+  conv_cgrid.o \
+  czangle.o \
+  delta_zs.o \
+  eddyx.o \
+  fire_plmris.o \
+  gas_depv_map.o \
+  getfline.o \
+  getparb.o \
+  hrno.o \
+  m3dry.o \
+  matrix.o \
+  opddep.o \
+  opdepv_diag.o \
+  opemis.o \
+  openlayout.o \
+  opmet.o \
+  oppt3d_diag.o \
+  opssemis.o \
+  parsline.o \
+  plmris.o \
+  plsprd.o \
+  preplm.o \
+  rddepv.o \
+  rdmet.o \
+  ssemis.o \
+  tmpbeis.o \
+  tri.o \
+  ungridb2.o \
+  vdiffacm2.o \
+  wrdaymsg.o \
+  write3_distr.o
+
+PHOT = \
+  phot_noop.o
+
+CHEM = \
+  chem_noop.o
+
+AERO = \
+  aero_driver.o \
+  aero_subs.o \
+  coags.o \
+  getpar.o \
+  hetchem.o \
+  isoropiaIIcode_adj.o \
+  opdiam.o \
+  opvis.o
+  #SOA_DEFN.o \
+
+AERO_DEPV = \
+  aero_depv.o
+
+CLOUD = \
+  aqchem_Precision.o \
+  aqchem_Parameters.o \
+  aqchem_Global.o \
+  aqchem_JacobianSP.o \
+  aqchem_Jacobian.o \
+  aqchem_LinearAlgebra.o \
+  aqchem_Function.o \
+  aqchem_Rates.o \
+  aqchem_Integrator.o \
+  AQ_DATA.o \
+  aqchem_Model.o \
+  aqchem_Initialize.o \
+  acmcld.o \
+  aqchem_kpp.o \
+  aq_map.o \
+  cldproc_acm.o \
+  convcld_acm.o \
+  getalpha.o \
+  hlconst.o \
+  indexn.o \
+  rescld.o \
+  scavwdep.o \
+  set_aeconcmin.o
+
+PROCAN = \
+  pa_init.o \
+  pa_irr_ctl.o \
+  pa_irr.o \
+  pa_mkhdr.o \
+  pa_output.o \
+  pa_update.o
+
+UTIL = \
+  adBuffer.o \
+  adStack.o \
+  cksummer.o \
+  findex.o \
+  get_envlist.o \
+  lstepf.o \
+  subhdomain.o \
+  subhfile.o
+
+OBJS = \
+  $(GLOBAL_MODULES) \
+  $(DRIVER) \
+  $(PAR) \
+  $(INIT) \
+  $(ADJCON) \
+  $(COUPLE) \
+  $(HADV) \
+  $(VADV) \
+  $(HDIFF) \
+  $(VDIFF) \
+  $(PHOT) \
+  $(CHEM) \
+  $(AERO) \
+  $(AERO_DEPV) \
+  $(CLOUD) \
+  $(PROCAN) \
+  $(UTIL)
+
+.SUFFIXES: .F .f .c .F90 .f90
+
+$(MODEL): $(OBJS)
+	$(LINKER) $(LINK_FLAGS) $(OBJS) $(LIBRARIES) -o $@
+
+.F.o:
+	$(FC) -c $(F_FLAGS) $(CPP_FLAGS) $(INCLUDES) $<
+
+.f.o:
+	$(FC) -c $(f_FLAGS) $<
+
+.F90.o:
+	$(FC) -c $(F90_FLAGS) $(CPP_FLAGS) $(INCLUDES) $<
+
+.f90.o:
+	$(FC) -c $(f90_FLAGS) $<
+
+.c.o:
+	$(CC) -c $(C_FLAGS) $<
+
+clean:
+	rm -f $(OBJS) *.mod
+
+
+# dependencies
+NH3_OFFLINE_FILE.o: GRID_CONF.F CHK_FILES_DEFS.F  \
+                $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+                /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+                $(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/AE_SPC.EXT \
+                $(MECH_INC)/AE_EMIS.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_EMIS.EXT \
+                /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+ADJOINT_FILES.o:	GRID_CONF.F CHK_FILES_DEFS.F PMEM_DEFN.F EMIS_DEFN.F \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_EMIS.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_EMIS.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+advstep.o:	GRID_CONF.F $(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+AVG_CONC.o:	VGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+CGRID_SPCS.o:	$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+driver_fwd.o:	PCGRID_DEFN.F VGRD_DEFN.F WVEL_DEFN.F STD_CONC.F \
+		AVG_CONC.F ADJOINT_FILES.F CHK_FILES_DEFS.F CHK_FILES.F adj_array_mod.f NH3_OFFLINE_FILE.F \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/RXCM.EXT \
+		$(MECH_INC)/RXDT.EXT
+GRID_CONF.o:	HGRD_DEFN.F VGRD_DEFN.F
+hcontvel.o:	GRID_CONF.F $(BASE_INC)/par/PE_COMM.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+HGRD_DEFN.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+hveloc.o:	GRID_CONF.F $(BASE_INC)/par/PE_COMM.EXT $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+PCGRID_DEFN.o:	GRID_CONF.F CGRID_SPCS.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+sciproc.o:	adj_array_mod.f NH3_OFFLINE_FILE.F CGRID_SPCS.F GRID_CONF.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(PA_INC)/PA_CTL.EXT
+STD_CONC.o:	HGRD_DEFN.F VGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_CONC.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_CONC.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_CONC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+syncstep.o:	GRID_CONF.F $(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+VGRD_DEFN.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+wr_aconc.o:	GRID_CONF.F AVG_CONC.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+wr_cgrid.o:	GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+wr_conc.o:	GRID_CONF.F STD_CONC.F WVEL_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+WVEL_DEFN.o:	GRID_CONF.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+par_init.o:	GRID_CONF.F PAGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(PA_INC)/PA_CTL.EXT /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed//include #lib
+par_term.o:	/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed//include #lib
+diffmsg.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+flcheck.o:	$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+grdcheck.o:	GRID_CONF.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+initscen.o:	HGRD_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+load_cgrid.o:	GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_ICBC.EXT $(MECH_INC)/GC_G2AE.EXT \
+		$(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_ICBC.EXT $(MECH_INC)/NR_SPC.EXT \
+		$(MECH_INC)/NR_ICBC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT
+opconc.o:	GRID_CONF.F WVEL_DEFN.F STD_CONC.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+setup_logdev.o:	/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib
+adjadv_noop.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+couple.o:	GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+ppmv_msmr.o:	GRID_CONF.F $(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+advbc_map.o:	$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_ICBC.EXT $(MECH_INC)/GC_ADV.EXT $(MECH_INC)/AE_ICBC.EXT \
+		$(MECH_INC)/AE_ADV.EXT $(MECH_INC)/NR_ICBC.EXT $(MECH_INC)/NR_ADV.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+hadv.o:	GRID_CONF.F CGRID_SPCS.F CHK_FILES_DEFS.F CHK_FILES.F \
+		$(BASE_INC)/par/PE_COMM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/GC_ADV.EXT $(MECH_INC)/AE_ADV.EXT $(MECH_INC)/NR_ADV.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+hppm.o:	HGRD_DEFN.F
+rdbcon.o:	GRID_CONF.F $(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/GC_ICBC.EXT $(MECH_INC)/GC_ADV.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_ICBC.EXT $(MECH_INC)/AE_ADV.EXT $(MECH_INC)/NR_SPC.EXT \
+		$(MECH_INC)/NR_ICBC.EXT $(MECH_INC)/NR_ADV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+xadv.o:	GRID_CONF.F CGRID_SPCS.F $(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_ADV.EXT \
+		$(MECH_INC)/AE_ADV.EXT $(MECH_INC)/NR_ADV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+yadv.o:	GRID_CONF.F CGRID_SPCS.F $(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_ADV.EXT \
+		$(MECH_INC)/AE_ADV.EXT $(MECH_INC)/NR_ADV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+vppm.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT
+zadvyppm.o:	GRID_CONF.F CGRID_SPCS.F WVEL_DEFN.F CHK_FILES_DEFS.F \
+		CHK_FILES.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/GC_ADV.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_ADV.EXT \
+		$(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_ADV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+deform.o:	GRID_CONF.F $(BASE_INC)/par/PE_COMM.EXT $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+hcdiff3d.o:	GRID_CONF.F $(BASE_INC)/par/PE_COMM.EXT $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+hdiff.o:	GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_DIFF.EXT $(MECH_INC)/AE_DIFF.EXT $(MECH_INC)/NR_DIFF.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT
+rho_j.o:	GRID_CONF.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+AERO_EMIS.o:	GRID_CONF.F PT3D_DEFN.F PMEM_DEFN.F PTMAP.F adj_array_mod.f \
+		$(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		$(MECH_INC)/RXCM.EXT $(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_EMIS.EXT
+beis3.o:	BIOG_EMIS.F
+BEIS_DEFN.o:	HGRD_DEFN.F BIOG_EMIS.F $(BASE_INC)/const/CONST.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT $(MECH_INC)/GC_EMIS.EXT \
+		$(MECH_INC)/NR_EMIS.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+BIOG_EMIS.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+cgrid_depv.o:	HGRD_DEFN.F $(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_DEPV.EXT \
+		$(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_DEPV.EXT $(MECH_INC)/NR_SPC.EXT \
+		$(MECH_INC)/NR_DEPV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT
+chkgrid.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+conv_cgrid.o:	GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+czangle.o:	$(BASE_INC)/const/CONST.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+DEPV_DEFN.o:	HGRD_DEFN.F DEPVVARS.F GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/RXCM.EXT $(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_DEPV.EXT \
+		$(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_DEPV.EXT $(MECH_INC)/NR_SPC.EXT \
+		$(MECH_INC)/NR_DEPV.EXT $(MECH_INC)/NR_N2AE.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT
+DEPVVARS.o:	HGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT
+eddyx.o:	GRID_CONF.F $(BASE_INC)/par/PE_COMM.EXT $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+EMIS_DEFN.o:	GRID_CONF.F adj_array_mod.f BEIS_DEFN.F PT3D_DEFN.F \
+		PMEM_DEFN.F AERO_EMIS.F BIOG_EMIS.F PTMAP.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_EMIS.EXT \
+		$(MECH_INC)/NR_EMIS.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+fire_plmris.o:	$(BASE_INC)/const/CONST.EXT
+gas_depv_map.o:	DEPVVARS.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/GC_DEPV.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_DEPV.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT
+hrno.o:	HGRD_DEFN.F BIOG_EMIS.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+m3dry.o:	HGRD_DEFN.F DEPVVARS.F $(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+matrix.o:	VGRD_DEFN.F $(MECH_INC)/GC_DIFF.EXT $(MECH_INC)/AE_DIFF.EXT \
+		$(MECH_INC)/NR_DIFF.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT
+opddep.o:	GRID_CONF.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_DDEP.EXT $(MECH_INC)/AE_DDEP.EXT $(MECH_INC)/NR_DDEP.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT
+opdepv_diag.o:	HGRD_DEFN.F DEPVVARS.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+opemis.o:	VGRD_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/NR_EMIS.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+openlayout.o:	HGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+opmet.o:	$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+oppt3d_diag.o:	GRID_CONF.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+opssemis.o:	GRID_CONF.F AERO_EMIS.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+plmris.o:	$(BASE_INC)/const/CONST.EXT
+PMEM_DEFN.o:	HGRD_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+PT3D_DEFN.o:	UDTYPES.F GRID_CONF.F STK_PRMS.F STK_EMIS.F PMEM_DEFN.F \
+		PTMET.F PTBILIN.F PTMAP.F VGRD_DEFN.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/AE_EMIS.EXT $(MECH_INC)/NR_EMIS.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+PTBILIN.o:	UDTYPES.F HGRD_DEFN.F VGRD_DEFN.F STK_PRMS.F
+PTMAP.o:	UDTYPES.F STK_EMIS.F PMEM_DEFN.F $(MECH_INC)/GC_EMIS.EXT \
+		$(MECH_INC)/AE_EMIS.EXT $(MECH_INC)/NR_EMIS.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT
+PTMET.o:	UDTYPES.F STK_PRMS.F PTBILIN.F VGRD_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+rddepv.o:	HGRD_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/RXCM.EXT $(MECH_INC)/GC_DEPV.EXT $(MECH_INC)/AE_DEPV.EXT \
+		$(MECH_INC)/NR_DEPV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT
+rdmet.o:	GRID_CONF.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+ssemis.o:	AERO_EMIS.F
+STK_EMIS.o:	UDTYPES.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+STK_PRMS.o:	UDTYPES.F HGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+tmpbeis.o:	HGRD_DEFN.F BIOG_EMIS.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT
+tri.o:	VGRD_DEFN.F $(MECH_INC)/GC_DIFF.EXT $(MECH_INC)/AE_DIFF.EXT \
+		$(MECH_INC)/NR_DIFF.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT
+ungridb2.o:	HGRD_DEFN.F PTBILIN.F
+vdiffacm2.o:	EMIS_DEFN.F DEPV_DEFN.F VDIFF_MAP.F CHK_FILES_DEFS.F \
+		CHK_FILES.F $(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT $(PA_INC)/PA_CTL.EXT
+VDIFF_MAP.o:	CGRID_SPCS.F AERO_EMIS.F $(BASE_INC)/emctrl/EMISPRM.vdif.EXT \
+		$(BASE_INC)/emctrl/EMISPRM.chem.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/GC_DIFF.EXT $(MECH_INC)/GC_DDEP.EXT \
+		$(MECH_INC)/GC_DEPV.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_DIFF.EXT \
+		$(MECH_INC)/AE_DDEP.EXT $(MECH_INC)/AE_DEPV.EXT $(MECH_INC)/NR_SPC.EXT \
+		$(MECH_INC)/NR_EMIS.EXT $(MECH_INC)/NR_DIFF.EXT $(MECH_INC)/NR_DDEP.EXT \
+		$(MECH_INC)/NR_DEPV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT
+phot_noop.o:	HGRD_DEFN.F VGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/RXCM.EXT
+chem_noop.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+AERO_DATA.o:	CGRID_SPCS.F MET_DATA.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/AE_SPC.EXT
+aero_driver.o:	GRID_CONF.F CGRID_SPCS.F AERO_DATA.F PRECURSOR_DATA.F \
+		SOA_DEFN.F MET_DATA.F CHK_FILES_DEFS.F CHK_FILES.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		$(MECH_INC)/RXCM.EXT $(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_EMIS.EXT \
+		$(MECH_INC)/GC_G2AE.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT \
+		$(MECH_INC)/NR_N2AE.EXT $(PA_INC)/PA_CTL.EXT
+aero_subs.o:	SOA_DEFN.F AERO_DATA.F MET_DATA.F PRECURSOR_DATA.F
+getpar.o:	AERO_DATA.F MET_DATA.F
+hetchem.o:	AERO_DATA.F PRECURSOR_DATA.F MET_DATA.F
+MET_DATA.o:	$(BASE_INC)/const/CONST.EXT
+opdiam.o:	GRID_CONF.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+opvis.o:	GRID_CONF.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+PRECURSOR_DATA.o:	CGRID_SPCS.F MET_DATA.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_G2AE.EXT $(MECH_INC)/NR_SPC.EXT \
+		$(MECH_INC)/NR_N2AE.EXT
+SOA_DEFN.o:	AERO_DATA.F MET_DATA.F CGRID_SPCS.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_G2AE.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_N2AE.EXT
+aero_depv.o:	GRID_CONF.F CGRID_SPCS.F NH3_OFFLINE_FILE.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/RXCM.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_DEPV.EXT
+aqchem_Function.o:	aqchem_Parameters.F90
+aqchem_Global.o:	aqchem_Parameters.F90
+aqchem_Initialize.o:	aqchem_Parameters.F90 aqchem_Global.F90 AQ_DATA.F
+aqchem_Integrator.o:	aqchem_Parameters.F90 aqchem_Global.F90 aqchem_LinearAlgebra.F90 \
+		aqchem_Function.F90 aqchem_Rates.F90 aqchem_Jacobian.F90
+aqchem_Jacobian.o:	aqchem_Parameters.F90 aqchem_JacobianSP.F90
+aqchem_kpp.o:	AQ_DATA.F aqchem_Model.F90 aqchem_Initialize.F90
+aqchem_LinearAlgebra.o:	aqchem_Parameters.F90 aqchem_JacobianSP.F90
+aqchem_Model.o:	aqchem_Precision.F90 aqchem_Parameters.F90 aqchem_Global.F90 \
+		aqchem_Function.F90 aqchem_Integrator.F90 aqchem_Rates.F90 aqchem_Jacobian.F90 \
+		aqchem_LinearAlgebra.F90
+aqchem_Parameters.o:	aqchem_Precision.F90
+aqchem_Rates.o:	aqchem_Parameters.F90 aqchem_Global.F90
+AQ_DATA.o:	AERO_DATA.F HGRD_DEFN.F CGRID_SPCS.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_G2AQ.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_A2AQ.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_N2AQ.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_T2AQ.EXT
+aq_map.o:	CGRID_SPCS.F AQ_DATA.F AERO_DATA.F $(BASE_INC)/const/CONST.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/RXCM.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_G2AQ.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_A2AQ.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_N2AQ.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_T2AQ.EXT
+cldproc_acm.o:	GRID_CONF.F CGRID_SPCS.F CHK_FILES_DEFS.F CHK_FILES.F \
+		$(BASE_INC)/const/CONST.EXT $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_WDEP.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_WDEP.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_WDEP.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_WDEP.EXT
+convcld_acm.o:	GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+getalpha.o:	AERO_DATA.F
+hlconst.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+rescld.o:	GRID_CONF.F CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+scavwdep.o:	CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_SCAV.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_SCAV.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_SCAV.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SCAV.EXT
+set_aeconcmin.o:	CGRID_SPCS.F $(BASE_INC)/const/CONST.EXT $(MECH_INC)/AE_SPC.EXT
+PAGRD_DEFN.o:	GRID_CONF.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(PA_INC)/PA_CTL.EXT $(PA_INC)/PA_CMN.EXT
+pa_init.o:	GRID_CONF.F PAGRD_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(PA_INC)/PA_CTL.EXT \
+		$(PA_INC)/PA_CMN.EXT $(PA_INC)/PA_DAT.EXT
+pa_irr_ctl.o:	GRID_CONF.F PAGRD_DEFN.F $(MECH_INC)/GC_SPC.EXT \
+		$(PA_INC)/PA_CMN.EXT
+pa_irr.o:	GRID_CONF.F $(MECH_INC)/RXCM.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(PA_INC)/PA_CMN.EXT
+pa_mkhdr.o:	GRID_CONF.F PAGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/AE_SPC.EXT $(PA_INC)/PA_CMN.EXT
+pa_output.o:	GRID_CONF.F PAGRD_DEFN.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		$(PA_INC)/PA_CTL.EXT $(PA_INC)/PA_CMN.EXT
+pa_update.o:	PAGRD_DEFN.F AERO_EMIS.F $(BASE_INC)/const/CONST.EXT \
+		$(BASE_INC)/filenames/FILES_CTM.EXT $(BASE_INC)/emctrl/EMISPRM.vdif.EXT \
+		$(BASE_INC)/emctrl/EMISPRM.chem.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/GC_DDEP.EXT \
+		$(MECH_INC)/GC_DEPV.EXT $(MECH_INC)/AE_SPC.EXT $(MECH_INC)/AE_DDEP.EXT \
+		$(MECH_INC)/AE_DEPV.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_EMIS.EXT \
+		$(MECH_INC)/NR_DDEP.EXT $(MECH_INC)/NR_DEPV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT $(PA_INC)/PA_CTL.EXT \
+		$(PA_INC)/PA_CMN.EXT
+cksummer.o:	GRID_CONF.F CGRID_SPCS.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/GC_SPC.EXT \
+		$(MECH_INC)/AE_SPC.EXT $(MECH_INC)/NR_SPC.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT
+lstepf.o:	$(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+subhdomain.o:	/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+subhfile.o:	GRID_CONF.F $(BASE_INC)/filenames/FILES_CTM.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT
+CHK_FILES.o:	GRID_CONF.F CHK_FILES_DEFS.F CHK_FILES_IMPL.F $(BASE_INC)/filenames/FILES_CTM.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT $(MECH_INC)/RXCM.EXT \
+		$(MECH_INC)/GC_SPC.EXT $(MECH_INC)/GC_EMIS.EXT $(MECH_INC)/GC_DIFF.EXT \
+		$(MECH_INC)/GC_ADV.EXT $(MECH_INC)/GC_CONC.EXT $(MECH_INC)/AE_SPC.EXT \
+		$(MECH_INC)/AE_EMIS.EXT $(MECH_INC)/AE_DIFF.EXT $(MECH_INC)/AE_ADV.EXT \
+		$(MECH_INC)/AE_CONC.EXT $(MECH_INC)/NR_SPC.EXT $(MECH_INC)/NR_EMIS.EXT \
+		$(MECH_INC)/NR_DIFF.EXT $(MECH_INC)/NR_ADV.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT \
+		/home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT
+CHK_FILES_IMPL.o:	CHK_FILES_DEFS.F HGRD_DEFN.F VGRD_DEFN.F /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT \
+		/mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT

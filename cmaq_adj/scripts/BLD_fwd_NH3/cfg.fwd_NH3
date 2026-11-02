@@ -1,0 +1,134 @@
+
+model       ADJOINT_FWD;
+
+FPP         /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort;
+
+cpp_flags   "  -Dparallel -Dcluster -DINTERPB=PINTERPB -DM3ERR=PM3ERR -DM3EXIT=PM3EXIT -DM3WARN=PM3WARN -DSHUT3=PSHUT3 -DWRITE3=PWRITE3 -DSUBST_MODULES=SE_MODULES -DSUBST_BARRIER=SE_BARRIER -DSUBST_GLOBAL_MAX=SE_GLOBAL_MAX -DSUBST_GLOBAL_MIN=SE_GLOBAL_MIN -DSUBST_GLOBAL_MIN_DATA=SE_GLOBAL_MIN_DATA -DSUBST_GLOBAL_TO_LOCAL_COORD=SE_GLOBAL_TO_LOCAL_COORD -DSUBST_GLOBAL_SUM=SE_GLOBAL_SUM -DSUBST_GLOBAL_LOGICAL=SE_GLOBAL_LOGICAL -DSUBST_LOOP_INDEX=SE_LOOP_INDEX -DSUBST_SUBGRID_INDEX=SE_SUBGRID_INDEX -DSUBST_HI_LO_BND_PE=SE_HI_LO_BND_PE -DSUBST_SUM_CHK=SE_SUM_CHK -DSUBST_INIT_ARRAY=SE_INIT_ARRAY -DSUBST_COMM=SE_COMM -DSUBST_MY_REGION=SE_MY_REGION -DSUBST_SLICE=SE_SLICE -DSUBST_GATHER=SE_GATHER -DSUBST_DATA_COPY=SE_DATA_COPY -DSUBST_IN_SYN=SE_IN_SYN";
+
+f_compiler  /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort;
+
+f_flags     "-fixed -132 -O0 -override-limits -mp1 -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_fwd_NH3/MOD_DIR -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort";
+
+c_flags     "-O2 -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include";
+
+link_flags  "-static-intel -openmp";
+
+libraries   "-L/mnt/HA/groups/cappsGrp/lib/se_snl -lse_snl -L/mnt/HA/groups/cappsGrp/lib/pario -lpario  -L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/intel64/lib -lmpich -L/mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64mpifort -lioapi -L/mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff";
+
+global      verbose;
+
+// mechanism and tracer: mech/cb05cl_ae5_aq, mech/trac0
+// project archive: /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+
+include SUBST_PE_COMM    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/par/PE_COMM.EXT;
+include SUBST_CONST      /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/const/CONST.EXT;
+include SUBST_FILES_ID   /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/filenames/FILES_CTM.EXT;
+include SUBST_EMPR_VD    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.vdif.EXT;
+include SUBST_EMPR_CH    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.chem.EXT;
+include SUBST_IOPARMS    /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT;
+include SUBST_IOFDESC    /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT;
+include SUBST_IODECL     /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT;
+include SUBST_RXCMMN     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXCM.EXT;
+include SUBST_RXDATA     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXDT.EXT;
+include SUBST_GC_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SPC.EXT;
+include SUBST_GC_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_EMIS.EXT;
+include SUBST_GC_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ICBC.EXT;
+include SUBST_GC_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DIFF.EXT;
+include SUBST_GC_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DDEP.EXT;
+include SUBST_GC_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DEPV.EXT;
+include SUBST_GC_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ADV.EXT;
+include SUBST_GC_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_CONC.EXT;
+include SUBST_GC_G2AE    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AE.EXT;
+include SUBST_GC_G2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AQ.EXT;
+include SUBST_GC_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SCAV.EXT;
+include SUBST_GC_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_WDEP.EXT;
+include SUBST_AE_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SPC.EXT;
+include SUBST_AE_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_EMIS.EXT;
+include SUBST_AE_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ICBC.EXT;
+include SUBST_AE_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DIFF.EXT;
+include SUBST_AE_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DDEP.EXT;
+include SUBST_AE_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DEPV.EXT;
+include SUBST_AE_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ADV.EXT;
+include SUBST_AE_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_CONC.EXT;
+include SUBST_AE_A2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_A2AQ.EXT;
+include SUBST_AE_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SCAV.EXT;
+include SUBST_AE_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_WDEP.EXT;
+include SUBST_NR_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SPC.EXT;
+include SUBST_NR_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_EMIS.EXT;
+include SUBST_NR_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ICBC.EXT;
+include SUBST_NR_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DIFF.EXT;
+include SUBST_NR_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DDEP.EXT;
+include SUBST_NR_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DEPV.EXT;
+include SUBST_NR_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ADV.EXT;
+include SUBST_NR_N2AE    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AE.EXT;
+include SUBST_NR_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_CONC.EXT;
+include SUBST_NR_N2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AQ.EXT;
+include SUBST_NR_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SCAV.EXT;
+include SUBST_NR_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_WDEP.EXT;
+include SUBST_TR_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT;
+include SUBST_TR_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT;
+include SUBST_TR_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT;
+include SUBST_TR_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT;
+include SUBST_TR_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT;
+include SUBST_TR_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT;
+include SUBST_TR_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT;
+include SUBST_TR_T2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_T2AQ.EXT;
+include SUBST_TR_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SCAV.EXT;
+include SUBST_TR_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_WDEP.EXT;
+
+// Process Analysis / Integrated Reaction Rates processing
+include SUBST_PACTL_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CTL.EXT;
+include SUBST_PACMN_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CMN.EXT;
+include SUBST_PADAT_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_DAT.EXT;
+
+// Parallel / Include message passing definitions
+include SUBST_MPICH /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/../include/mpif.h ;
+
+// options are ctm and ctm_yamo
+Module driver/yamo_adj_fwd;
+
+Module par/par;
+
+// options are init and init_yamo
+Module init/yamo;
+
+// options are denrate and adjcon_noop
+Module adjcon/adjcon_noop;
+
+Module couple/gencoor;
+
+// options are hppm, hyamo and hadv_noop
+Module hadv/yamo_cadj_fwd;
+
+// options are vppm, vyamo and vadv_noop
+Module vadv/vyamo_cadj_fwd;
+
+// options are multi_scale and hdiff_noop
+Module hdiff/multiscale_adj_fwd;
+
+// options are eddy, acm2 and vdiff_noop
+Module vdiff/acm2_inline_adj_fwd;
+
+// options are phot_table, phot_sat and phot_inline
+Module phot/phot_noop;
+
+// options are ros3, smvgear, ebi_cb05cl, ebi_cb05cl_ae5, ebi_saprc99, ebi_saprc99_ae5 and chem_noop
+Module chem/chem_noop;
+
+// options are aero4, aero5 and aero_noop
+Module aero/aero5_adj_fwd;
+
+// options are aero_depv2 and aero_depv_noop
+Module aero_depv/aero_depv2;
+
+// options are cloud_acm, cloud_acm_ae5 and cloud_noop
+Module cloud/cloud_acm_ae5_fwd;
+
+// options are pa and pa_noop, which requires the replacement of the three
+// global include files with their pa_noop counterparts
+Module procan/pa;
+
+Module util/util_adj;
+
+Module chkpnt/chkpnt_ioapi;
+

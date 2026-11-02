@@ -1,0 +1,5 @@
+/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort -c -g -fixed -extend_source -WB  cfg_module.f
+/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort -c -g -fixed -extend_source -WB  parser.f
+/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort -c -g -fixed -extend_source -WB  utils.f
+/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort -c -g -fixed -extend_source -WB  bldmake.f
+/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort cfg_module.o parser.o utils.o bldmake.o -o bldmake

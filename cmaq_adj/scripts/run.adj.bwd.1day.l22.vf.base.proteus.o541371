@@ -1,0 +1,2101 @@
+ 
+ Input data path, M3DATA set to /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData
+ 
+RM (run mode) was not set; this will be a parallel run
+Fri Jul 24 00:45:51 EDT 2020
+
+model       ADJOINT_BWD;
+
+FPP         /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort;
+
+cpp_flags   "  -Dparallel -Dcluster -DINTERPB=PINTERPB -DM3ERR=PM3ERR -DM3EXIT=PM3EXIT -DM3WARN=PM3WARN -DSHUT3=PSHUT3 -DWRITE3=PWRITE3 -DSUBST_MODULES=SE_MODULES -DSUBST_BARRIER=SE_BARRIER -DSUBST_GLOBAL_MAX=SE_GLOBAL_MAX -DSUBST_GLOBAL_MIN=SE_GLOBAL_MIN -DSUBST_GLOBAL_MIN_DATA=SE_GLOBAL_MIN_DATA -DSUBST_GLOBAL_TO_LOCAL_COORD=SE_GLOBAL_TO_LOCAL_COORD -DSUBST_GLOBAL_SUM=SE_GLOBAL_SUM -DSUBST_GLOBAL_LOGICAL=SE_GLOBAL_LOGICAL -DSUBST_LOOP_INDEX=SE_LOOP_INDEX -DSUBST_SUBGRID_INDEX=SE_SUBGRID_INDEX -DSUBST_HI_LO_BND_PE=SE_HI_LO_BND_PE -DSUBST_SUM_CHK=SE_SUM_CHK -DSUBST_INIT_ARRAY=SE_INIT_ARRAY -DSUBST_COMM=SE_COMM -DSUBST_MY_REGION=SE_MY_REGION -DSUBST_SLICE=SE_SLICE -DSUBST_GATHER=SE_GATHER -DSUBST_DATA_COPY=SE_DATA_COPY -DSUBST_IN_SYN=SE_IN_SYN";
+
+f_compiler  /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort;
+
+f_flags     "-fixed -132 -O0 -override-limits -mp1 -module /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/MOD_DIR -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include -I /mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64ifort";
+
+c_flags     "-O2 -I /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include";
+
+link_flags  "-static-intel -openmp";
+
+libraries   "-L/mnt/HA/groups/cappsGrp/lib/se_snl -lse_snl -L/mnt/HA/groups/cappsGrp/lib/pario -lpario  -L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/intel64/lib -lmpich -L/mnt/HA/groups/cappsGrp/lib/ioapi/Linux2_x86_64mpifort -lioapi -L/mnt/HA/groups/cappsGrp/lib/netcdf/lib -lnetcdf -lnetcdff";
+
+global      verbose;
+
+// mechanism and tracer: mech/cb05cl_ae5_aq, mech/trac0
+// project archive: /home/cl3293/CMAQ_adj_NH3/cmaq_adj/CCTM
+
+include SUBST_PE_COMM    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/par/PE_COMM.EXT;
+include SUBST_CONST      /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/const/CONST.EXT;
+include SUBST_FILES_ID   /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/filenames/FILES_CTM.EXT;
+include SUBST_EMPR_VD    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.vdif.EXT;
+include SUBST_EMPR_CH    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/fixed/emctrl/EMISPRM.chem.EXT;
+include SUBST_IOPARMS    /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/PARMS3.EXT;
+include SUBST_IOFDESC    /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/FDESC3.EXT;
+include SUBST_IODECL     /mnt/HA/groups/cappsGrp/lib/ioapi/fixed_src/IODECL3.EXT;
+include SUBST_RXCMMN     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXCM.EXT;
+include SUBST_RXDATA     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/RXDT.EXT;
+include SUBST_GC_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SPC.EXT;
+include SUBST_GC_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_EMIS.EXT;
+include SUBST_GC_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ICBC.EXT;
+include SUBST_GC_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DIFF.EXT;
+include SUBST_GC_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DDEP.EXT;
+include SUBST_GC_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_DEPV.EXT;
+include SUBST_GC_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_ADV.EXT;
+include SUBST_GC_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_CONC.EXT;
+include SUBST_GC_G2AE    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AE.EXT;
+include SUBST_GC_G2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_G2AQ.EXT;
+include SUBST_GC_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_SCAV.EXT;
+include SUBST_GC_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/GC_WDEP.EXT;
+include SUBST_AE_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SPC.EXT;
+include SUBST_AE_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_EMIS.EXT;
+include SUBST_AE_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ICBC.EXT;
+include SUBST_AE_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DIFF.EXT;
+include SUBST_AE_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DDEP.EXT;
+include SUBST_AE_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_DEPV.EXT;
+include SUBST_AE_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_ADV.EXT;
+include SUBST_AE_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_CONC.EXT;
+include SUBST_AE_A2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_A2AQ.EXT;
+include SUBST_AE_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_SCAV.EXT;
+include SUBST_AE_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/AE_WDEP.EXT;
+include SUBST_NR_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SPC.EXT;
+include SUBST_NR_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_EMIS.EXT;
+include SUBST_NR_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ICBC.EXT;
+include SUBST_NR_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DIFF.EXT;
+include SUBST_NR_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DDEP.EXT;
+include SUBST_NR_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_DEPV.EXT;
+include SUBST_NR_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_ADV.EXT;
+include SUBST_NR_N2AE    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AE.EXT;
+include SUBST_NR_CONC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_CONC.EXT;
+include SUBST_NR_N2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_N2AQ.EXT;
+include SUBST_NR_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_SCAV.EXT;
+include SUBST_NR_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/cb05cl_ae5_aq/NR_WDEP.EXT;
+include SUBST_TR_SPC     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SPC.EXT;
+include SUBST_TR_EMIS    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_EMIS.EXT;
+include SUBST_TR_ICBC    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ICBC.EXT;
+include SUBST_TR_DIFF    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DIFF.EXT;
+include SUBST_TR_DDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DDEP.EXT;
+include SUBST_TR_DEPV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_DEPV.EXT;
+include SUBST_TR_ADV     /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_ADV.EXT;
+include SUBST_TR_T2AQ    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_T2AQ.EXT;
+include SUBST_TR_SCAV    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_SCAV.EXT;
+include SUBST_TR_WDEP    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/mech/trac0/TR_WDEP.EXT;
+
+// Process Analysis / Integrated Reaction Rates processing
+include SUBST_PACTL_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CTL.EXT;
+include SUBST_PACMN_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_CMN.EXT;
+include SUBST_PADAT_ID    /home/cl3293/CMAQ_adj_NH3/cmaq_adj/ICL/procan/pa_noop/PA_DAT.EXT;
+
+// Parallel / Include message passing definitions
+include SUBST_MPICH /mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib -lmpi/../include/mpif.h ;
+
+// options are ctm and ctm_yamo
+Module driver/yamo_adj_bwd;
+
+Module par/par;
+
+// options are init and init_yamo
+Module init/adj_bwd;
+
+// options are denrate and adjcon_noop
+Module adjcon/adjcon_noop;
+
+Module couple/gencoor;
+
+// options are hppm, hyamo and hadv_noop
+Module hadv/yamo_cadj_bwd;
+
+// options are vppm, vyamo and vadv_noop
+Module vadv/vyamo_cadj_bwd;
+
+// options are multi_scale and hdiff_noop
+Module hdiff/multiscale_adj_bwd;
+
+// options are eddy, acm2 and vdiff_noop
+Module vdiff/acm2_inline_adj_bwd;
+
+// options are phot_table, phot_sat and phot_inline
+Module phot/phot_noop;
+
+// options are ros3, smvgear, ebi_cb05cl, ebi_cb05cl_ae5, ebi_saprc99, ebi_saprc99_ae5 and chem_noop
+Module chem/chem_bwd_noop;
+
+// options are aero4, aero5 and aero_noop
+Module aero/aero5_adj_bwd;
+
+// options are aero_depv2 and aero_depv_noop
+Module aero_depv/aero_depv2;
+
+// options are cloud_acm, cloud_acm_ae5 and cloud_noop
+Module cloud/cloud_acm_ae5_bwd;
+
+// options are pa and pa_noop, which requires the replacement of the three
+// global include files with their pa_noop counterparts
+Module procan/pa;
+
+Module util/util_adj;
+
+Module chkpnt/chkpnt_ioapi;
+
+    
+if ( par == ser ) then
+setenv NPCOL_NPROW 8 2
+set NPROCS = 16
+endif
+if ( 0 ) then
+echo >>>>>> start model run at  `date`
+date
+>>>>>> start model run at  Fri Jul 24 00:45:51 EDT 2020
+set echo
+limit stacksize unlimited
+setenv IOAPI_LOG_WRITE F
+setenv CTM_MAXSYNC 600
+setenv CTM_MINSYNC 600
+setenv CTM_PT3DEMIS N
+setenv CTM_EMLAYS 1
+setenv KZMIN N
+setenv FL_ERR_STOP F
+setenv PROMPTFLAG F
+setenv GRIDDESC /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other/GRIDDESC
+setenv GRID_NAME CMAQ-BENCHMARK
+setenv CONC_SPCS  NH3 ANH4I ANH4J 
+setenv CONC_BLEV_ELEV  1 34 
+setenv AVG_CONC_SPCS ALL
+setenv ACONC_BLEV_ELEV  1 34 
+set OCEANpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other
+set OCEANfile = surf_BENCHMARK.ncf
+setenv ADJNLAYS_FRC 22
+setenv FDM_TEST T
+setenv ADJ_LGRID_FREQ OUTPUT_STEP
+if ( 06 == 01 ) then
+if ( 06 == 02 ) then
+if ( 06 == 03 ) then
+if ( 06 == 04 ) then
+if ( 06 == 05 ) then
+if ( 06 == 06 ) then
+set juladd = 151
+else if ( 06 == 07 ) then
+@ day = 10
+@ eday = 10
+while ( 10 > = 10 )
+date
+Fri Jul 24 00:45:51 EDT 2020
+echo  
+ 
+echo 10
+10
+set STDAT = `echo $day | awk '{printf("%2.2d",$1)}'`
+echo 10
+awk {printf("%2.2d",$1)}
+@ STDATE = 10 + 151 + 7 * 1000 + 2000000
+set FLDATE = 20070610
+set EMISDATE = 20070610
+echo 10
+10
+set STTIME = 000000
+set NSTEPS = 240000
+set TSTEP = 010000
+set yest = `echo $day | awk '{printf("%2.2d",$1+1)}'`
+awk {printf("%2.2d",$1+1)}
+echo 10
+set yesterday = 20070611
+set yrmn = 200706
+cd /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData
+date
+Fri Jul 24 00:45:51 EDT 2020
+set timestamp
+setenv CTM_APPL bwd_NH3.base.20070610
+set DISP = update
+setenv EMISDATE 20070610
+set EMISpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/emis
+if ( N == N ) then
+set EMISfile = emis_CMAQ-NH3_Tracer_20070610.ncf
+else
+set OUTDIR = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+set OUTDIR2 = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+set CONCfile = CONC.20070610
+set ACONCfile = ACONC.20070610
+set CGRIDfile = CGRID.20070610
+set DD1file = DRYDEP.20070610
+set WD1file = WETDEP1.20070610
+set WD2file = WETDEP2.20070610
+set SS1file = SSEMIS1.20070610
+set AV1file = AEROVIS.20070610
+set AD1file = AERODIAM.20070610
+set PA1file = PA_1.20070610
+set PA2file = PA_2.20070610
+set PA3file = PA_3.20070610
+set IRR1file = IRR_1.20070610
+set IRR2file = IRR_2.20070610
+set IRR3file = IRR_3.20070610
+set RJ1file = RJ_1.20070610
+set RJ2file = RJ_2.20070610
+setenv CHK_PATH /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+setenv ADJ_LGRID /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/LGRID.bwd_NH3.20070610 -v
+setenv ADJ_LGRID_EM /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EM.LGRID.bwd_NH3.20070610 -v
+setenv CTM_XFIRST_OUT /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/XFIRST.bwd_NH3.20070610
+setenv CTM_XFIRST_IN /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/XFIRST.20070610
+setenv CTM_CONC_FWD /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610
+setenv CTM_CGRID_FWD /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070610
+setenv ADJ_CHEM_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CHEM_CHK.20070610 -v
+setenv ADJ_VDIFF_CHK_N /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VDIFF_CHK.20070611 -v
+setenv ADJ_VDIFF_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VDIFF_CHK.20070610 -v
+setenv ADJ_AERO_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERO_CHK.20070610 -v
+setenv ADJ_HA_RHOJ_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/HA_RHOJ_CHK.20070610 -v
+setenv ADJ_VA_RHOJ_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VA_RHOJ_CHK.20070610 -v
+setenv ADJ_HADV_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/HADV_CHK.20070610 -v
+setenv ADJ_VADV_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VADV_CHK.20070610 -v
+setenv ADJ_EMIS_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EMIS_CHK.20070610 -v
+setenv ADJ_EMIST_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EMIST_CHK.20070610 -v
+setenv ADJ_CLD_CHK /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CLD_CHK.20070610 -v
+setenv NH3_OFFLINE_FILE /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/NH3_OFFLINE_FILE/NH3_OFFLINE_FILE.20070610 -v
+if ( 20070610 == 20070610 ) then
+set GC_ICpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+set GC_ICfile = CGRID.20070611
+setenv INIT_LGRID_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/LGRID.bwd_NH3.20070611 -v
+setenv INIT_EM_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EM.LGRID.bwd_NH3.20070611 -v
+else
+setenv ADJ_FORCE /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ADJ_FORCE.20070610
+set METpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip
+set extn = 20070610
+set GC2file = GRIDCRO2D_20070610
+set GD2file = GRIDDOT2D_20070610
+set MC2file = METCRO2D_20070610
+set MD3file = METDOT3D_20070610
+set MC3file = METCRO3D_20070610
+set MB3file = METBDY3D_20070610
+set TR_DVpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip
+set TR_DVfile = METCRO2D_20070610
+set JVALpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/jproc
+set JVALfile = JTABLE_2007161
+set AE_ICpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+set NR_ICpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+set TR_ICpath = /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+set AE_ICfile = CGRID.20070611
+set NR_ICfile = CGRID.20070611
+set TR_ICfile = CGRID.20070611
+source /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/in_out.bwd.q
+if ( 0 ) then
+if ( 1 ) then
+setenv DEPV_TRAC_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610 ) ) then
+endif
+if ( 0 ) then
+if ( 1 ) then
+setenv OCEAN_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other/surf_BENCHMARK.ncf
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other/surf_BENCHMARK.ncf ) ) then
+endif
+setenv EMIS_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/emis/emis_CMAQ-NH3_Tracer_20070610.ncf
+setenv INIT_GASC_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+setenv INIT_AERO_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+setenv INIT_NONR_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+setenv INIT_TRAC_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+setenv GRID_DOT_2D /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDDOT2D_20070610
+setenv GRID_CRO_2D /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDCRO2D_20070610
+setenv MET_CRO_2D /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610
+setenv MET_DOT_3D /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METDOT3D_20070610
+setenv MET_CRO_3D /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610
+setenv MET_BDY_3D /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METBDY3D_20070610
+setenv LAYER_FILE /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610
+setenv XJ_DATA /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/jproc/JTABLE_2007161
+set flist = ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/emis/emis_CMAQ-NH3_Tracer_20070610.ncf /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDDOT2D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDCRO2D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METDOT3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METBDY3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/jproc/JTABLE_2007161 )
+foreach file ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/emis/emis_CMAQ-NH3_Tracer_20070610.ncf /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDDOT2D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDCRO2D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METDOT3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METBDY3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/jproc/JTABLE_2007161 )
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/emis/emis_CMAQ-NH3_Tracer_20070610.ncf ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDDOT2D_20070610 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDCRO2D_20070610 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METDOT3D_20070610 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METBDY3D_20070610 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610 ) ) then
+end
+if ( ! ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/jproc/JTABLE_2007161 ) ) then
+end
+setenv CTM_CONC_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 -v
+setenv A_CONC_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 -v
+setenv S_CGRID /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070610 -v
+setenv CTM_DRY_DEP_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 -v
+setenv CTM_WET_DEP_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 -v
+setenv CTM_WET_DEP_2 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP2.20070610 -v
+setenv CTM_SSEMIS_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/SSEMIS1.20070610 -v
+setenv CTM_VIS_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 -v
+setenv CTM_DIAM_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERODIAM.20070610 -v
+setenv CTM_IPR_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_1.20070610 -v
+setenv CTM_IPR_2 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_2.20070610 -v
+setenv CTM_IPR_3 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_3.20070610 -v
+setenv CTM_IRR_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_1.20070610 -v
+setenv CTM_IRR_2 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_2.20070610 -v
+setenv CTM_IRR_3 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_3.20070610 -v
+setenv CTM_RJ_1 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_1.20070610 -v
+setenv CTM_RJ_2 /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_2.20070610 -v
+set flist = ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP2.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/SSEMIS1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERODIAM.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_2.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_3.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_2.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_3.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_2.20070610 -v )
+echo  Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070610 -v
+ Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070610 -v
+unalias rm
+foreach file ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP2.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/SSEMIS1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERODIAM.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_2.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_3.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_2.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_3.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_1.20070610 -v /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_2.20070610 -v )
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 ) then
+echo  /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 already exists
+ /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 already exists
+if ( update == delete ) then
+if ( update == update ) then
+echo  Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610
+ Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610
+else
+endif
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 ) then
+echo  /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 already exists
+ /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 already exists
+if ( update == delete ) then
+if ( update == update ) then
+echo  Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610
+ Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610
+else
+endif
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 ) then
+echo  /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 already exists
+ /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 already exists
+if ( update == delete ) then
+if ( update == update ) then
+echo  Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610
+ Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610
+else
+endif
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 ) then
+echo  /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 already exists
+ /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 already exists
+if ( update == delete ) then
+if ( update == update ) then
+echo  Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610
+ Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610
+else
+endif
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP2.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP2.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/SSEMIS1.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/SSEMIS1.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 ) then
+echo  /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 already exists
+ /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 already exists
+if ( update == delete ) then
+if ( update == update ) then
+echo  Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610
+ Updating /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610
+else
+endif
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERODIAM.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERODIAM.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_1.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_1.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_2.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_2.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_3.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_3.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_1.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_1.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_2.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_2.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_3.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_3.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_1.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_1.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_2.20070610 != -v ) then
+if ( -e /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_2.20070610 ) then
+endif
+end
+if ( -v != -v ) then
+end
+if ( 0 ) exit 1
+setenv CTM_STDATE 2007161
+setenv CTM_STTIME 000000
+setenv CTM_RUNLEN 240000
+setenv CTM_TSTEP 010000
+setenv CTM_PROGNAME /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/ADJOINT_BWD
+env
+TERM=linux
+SGE_CELL=default
+PATH=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin:/opt/mellanox/mxm/bin:/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4/bin:/mnt/HA/opt/netcdf/intel/2015/4.4.1/bin:/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial/bin:/mnt/HA/opt/szip/intel/2015/2.1/bin:/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/bin:/mnt/HA/opt/intel/composer_xe_2015.1.133/bin/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64_mic/bin:/cm/shared/apps/gcc/4.8.1/bin:/cm/shared/apps/sge/univa/utilbin/lx-amd64:/cm/shared/apps/sge/univa/bin/lx-amd64:/local/scratch/541371.1.all.q:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin
+RUNLEVEL=3
+runlevel=3
+PWD=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData
+LANGSH_SOURCED=1
+LANG=en_US.UTF-8
+SGE_ROOT=/cm/shared/apps/sge/univa
+PREVLEVEL=N
+previous=N
+CONSOLETYPE=serial
+SHLVL=3
+UPSTART_INSTANCE=
+UPSTART_EVENTS=runlevel
+UPSTART_JOB=rc
+_=/cm/shared/apps/sge/univa/bin/lx-amd64/sge_execd
+SGE_BINDING=0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+REQNAME=run.adj.bwd.1day.l22.vf.base.proteus
+HOME=/home/cl3293
+SHELL=/bin/csh
+USER=cl3293
+LOGNAME=cl3293
+JOB_NAME=run.adj.bwd.1day.l22.vf.base.proteus
+JOB_SCRIPT=/cm/local/apps/sge/var/spool/ic21n04/job_scripts/541371
+SGE_BINARY_PATH=/cm/shared/apps/sge/univa/bin/lx-amd64
+REQUEST=run.adj.bwd.1day.l22.vf.base.proteus
+HOSTNAME=ic21n04.cm.cluster
+QUEUE=all.q
+JOB_ID=541371
+ENVIRONMENT=BATCH
+ARC=lx-amd64
+NQUEUES=1
+NSLOTS=16
+NHOSTS=1
+RESTARTED=0
+TMPDIR=/local/scratch/541371.1.all.q
+TMP=/local/scratch/541371.1.all.q
+PE=fixed16
+PE_HOSTFILE=/cm/local/apps/sge/var/spool/ic21n04/active_jobs/541371.1/pe_hostfile
+SGE_RSH_COMMAND=builtin
+SGE_O_HOME=/home/cl3293
+SGE_O_LOGNAME=cl3293
+SGE_O_PATH=/home/cl3293/anaconda3/bin:/mnt/HA/groups/cappsGrp/lib:/usr/local/bin:/opt/mellanox/openshmem/2.2/bin:/opt/mellanox/mxm/bin:/opt/mellanox/hcoll/bin:/opt/mellanox/fca/bin:/opt/mellanox/fca/scripts:/opt/mellanox/bupc/2.2/bin:/home/cl3293/anaconda3/bin:/mnt/HA/groups/cappsGrp/lib:/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin:/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4/bin:/mnt/HA/opt/netcdf/intel/2015/4.4.1/bin:/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial/bin:/mnt/HA/opt/szip/intel/2015/2.1/bin:/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/bin:/mnt/HA/opt/intel/composer_xe_2015.1.133/bin/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64_mic/bin:/usr/local/bin:/usr/lib64/qt-3.3/bin:/opt/mellanox/openshmem/2.2/bin:/opt/mellanox/mxm/bin:/opt/mellanox/hcoll/bin:/opt/mellanox/fca/bin:/opt/mellanox/fca/scripts:/opt/mellanox/bupc/2.2/bin:/cm/shared/apps/sge/univa/utilbin/lx-amd64:/cm/shared/apps/sge/univa/bin/lx-amd64:/cm/shared/apps/gcc/4.8.1/bin:/usr/local/bin:/bin:/usr/bin:/opt/ibutils/bin:/sbin:/usr/sbin:/sbin:/usr/sbin:/sbin:/usr/sbin:/sbin:/usr/sbin
+SGE_O_SHELL=/bin/csh
+SGE_O_MAIL=/var/spool/mail/cl3293
+SGE_O_HOST=proteusi01
+SGE_O_WORKDIR=/home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts
+SGE_TASK_ID=undefined
+SGE_TASK_FIRST=undefined
+SGE_TASK_LAST=undefined
+SGE_TASK_STEPSIZE=undefined
+SGE_ARCH=lx-amd64
+SGE_ACCOUNT=sge
+SGE_JOB_SPOOL_DIR=/cm/local/apps/sge/var/spool/ic21n04/active_jobs/541371.1
+SGE_STDIN_PATH=/dev/null
+SGE_STDOUT_PATH=/home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/run.adj.bwd.1day.l22.vf.base.proteus.o541371
+SGE_STDERR_PATH=/home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/run.adj.bwd.1day.l22.vf.base.proteus.o541371
+SGE_CWD_PATH=/home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts
+HOSTTYPE=x86_64-linux
+VENDOR=unknown
+OSTYPE=linux
+MACHTYPE=x86_64
+GROUP=cappsGrp
+HOST=ic21n04
+MODULEPATH=/cm/local/modulefiles:/cm/shared/modulefiles:/mnt/HA/opt/modulefiles
+MODULE_VERSION=3.2.10
+MODULE_VERSION_STACK=3.2.10
+MODULESHOME=/cm/local/apps/environment-modules/3.2.10/Modules/3.2.10
+LOADEDMODULES=shared:proteus:sge/univa:gcc/4.8.1:intel/composerxe/2015.1.133:zlib/cloudflare/intel/2015/1.2.8:szip/intel/2015/2.1:proteus-hdf5_18/intel/2015/1.8.17-serial:proteus-netcdf/intel/2015/4.4.1:proteus-netcdf-fortran/intel/2015/4.4.4:proteus-openmpi/intel/2015/1.8.1-mlnx-ofed
+_LMFILES_=/cm/local/modulefiles/shared:/cm/shared/modulefiles/proteus:/cm/shared/modulefiles/sge/univa:/cm/shared/modulefiles/gcc/4.8.1:/mnt/HA/opt/modulefiles/intel/composerxe/2015.1.133:/mnt/HA/opt/modulefiles/zlib/cloudflare/intel/2015/1.2.8:/mnt/HA/opt/modulefiles/szip/intel/2015/2.1:/mnt/HA/opt/modulefiles/proteus-hdf5_18/intel/2015/1.8.17-serial:/mnt/HA/opt/modulefiles/proteus-netcdf/intel/2015/4.4.1:/mnt/HA/opt/modulefiles/proteus-netcdf-fortran/intel/2015/4.4.4:/mnt/HA/opt/modulefiles/proteus-openmpi/intel/2015/1.8.1-mlnx-ofed
+LM_LICENSE_FILE=28518@proteusmaster.cm.cluster
+PROTEUSPREFIX=/mnt/HA/opt
+DRMAA_LIBRARY_PATH=/cm/shared/apps/sge/univa/lib/lx-amd64/libdrmaa.so.1.0
+LD_LIBRARY_PATH=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib:/opt/mellanox/mxm/lib:/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4/lib:/mnt/HA/opt/netcdf/intel/2015/4.4.1/lib:/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial/lib:/mnt/HA/opt/szip/intel/2015/2.1/lib:/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/lib:/mnt/HA/opt/intel/composer_xe_2015.1.133/mpirt/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/ipp/../compiler/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/ipp/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/mkl/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/compiler/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/tbb/lib/intel64/gcc4.4:/cm/shared/apps/gcc/4.8.1/lib64:/cm/shared/apps/gcc/4.8.1/lib:/cm/shared/apps/sge/univa/lib/lx-amd64
+MANPATH=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/share/man:/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/share/man:/mnt/HA/opt/intel/composer_xe_2015.1.133/man/en_US:/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64/share/man:/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64_mic/share/man:/cm/shared/apps/sge/univa/man:/usr/share/man
+AR=xiar
+CC=icc
+CPATH=/mnt/HA/opt/intel/composer_xe_2015.1.133/ipp/include:/mnt/HA/opt/intel/composer_xe_2015.1.133/mkl/include:/mnt/HA/opt/intel/composer_xe_2015.1.133/tbb/include
+CXX=icpc
+F77=ifort
+F90=ifort
+FC=ifort
+GDBSERVER_MIC=/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/target/mic/bin/gdbserver
+GDB_CROSS=/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64_mic/bin/gdb-mic
+INCLUDE=/mnt/HA/opt/intel/composer_xe_2015.1.133/mkl/include
+INFOPATH=/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64/share/info:/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64_mic/share/info
+INTEL_CC_HOME=/mnt/HA/opt/intel/composer_xe_2015.1.133
+INTEL_COMPOSERXE_HOME=/mnt/HA/opt/intel/composer_xe_2015.1.133
+INTEL_LICENSE_FILE=/mnt/HA/opt/intel/composer_xe_2015.1.133/licenses/USE_SERVER_GSKR-7L5RXJZL.lic
+INTEL_PYTHONHOME=/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/python/intel64
+IPPROOT=/mnt/HA/opt/intel/composer_xe_2015.1.133/ipp
+LANGUAGE_TERRITORY=en_US
+LD=xild
+LIBRARY_PATH=/mnt/HA/opt/intel/composer_xe_2015.1.133/mpirt/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/ipp/../compiler/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/ipp/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/mkl/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/compiler/lib/intel64:/mnt/HA/opt/intel/composer_xe_2015.1.133/tbb/lib/intel64/gcc4.4
+MIC_LD_LIBRARY_PATH=/mnt/HA/opt/intel/composer_xe_2015.1.133/mpirt/lib/mic:/mnt/HA/opt/intel/composer_xe_2015.1.133/mkl/lib/mic:/mnt/HA/opt/intel/composer_xe_2015.1.133/compiler/lib/mic:/mnt/HA/opt/intel/composer_xe_2015.1.133/tbb/lib/mic
+MIC_LIBRARY_PATH=/mnt/HA/opt/intel/composer_xe_2015.1.133/mpirt/lib/mic:/mnt/HA/opt/intel/composer_xe_2015.1.133/compiler/lib/mic
+MKLROOT=/mnt/HA/opt/intel/composer_xe_2015.1.133/mkl
+MPM_LAUNCHER=/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/mpm/bin/start_mpm.sh
+NLSPATH=/mnt/HA/opt/intel/composer_xe_2015.1.133/compiler/lib/intel64/locale/%l_%t/%N:/mnt/HA/opt/intel/composer_xe_2015.1.133/ipp/lib/intel64/locale/%l_%t/%N:/mnt/HA/opt/intel/composer_xe_2015.1.133/mkl/lib/intel64/locale/%l_%t/%N:/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64_mic/share/locale/%l_%t/%N:/mnt/HA/opt/intel/composer_xe_2015.1.133/debugger/gdb/intel64/share/locale/%l_%t/%N
+TBBROOT=/mnt/HA/opt/intel/composer_xe_2015.1.133/tbb
+HDF5DIR=/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial
+HDF5INCDIR=/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial/include
+HDF5INCLUDEDIR=/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial/include
+HDF5LIBDIR=/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial/lib
+HDF5_DIR=/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial
+HDF5_ROOT=/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial
+HDF5_VERSION=1.8.17
+LD_RUN_PATH=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib:/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4/lib:/mnt/HA/opt/netcdf/intel/2015/4.4.1/lib:/mnt/HA/opt/hdf5_18/intel/2015/1.8.17-serial/lib:/mnt/HA/opt/szip/intel/2015/2.1/lib
+PKG_CONFIG_PATH=/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/lib/pkgconfig
+SZIPDIR=/mnt/HA/opt/szip/intel/2015/2.1
+SZIPINCDIR=/mnt/HA/opt/szip/intel/2015/2.1/include
+SZIPLIBDIR=/mnt/HA/opt/szip/intel/2015/2.1/lib
+ZLIBDIR=/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/lib
+ZLIBHOME=/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8
+ZLIBINC=/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/include
+ZLIBINCDIR=/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/include
+ZLIBLIBDIR=/mnt/HA/opt/zlib/cloudflare/intel/2015/1.2.8/lib
+NCDIR=/mnt/HA/opt/netcdf/intel/2015/4.4.1
+NETCDF=/mnt/HA/opt/netcdf/intel/2015/4.4.1
+NETCDFDIR=/mnt/HA/opt/netcdf/intel/2015/4.4.1
+NETCDFINCDIR=/mnt/HA/opt/netcdf/intel/2015/4.4.1/include
+NETCDFLIBDIR=/mnt/HA/opt/netcdf/intel/2015/4.4.1/lib
+NETCDF_VERSION=4.4.1
+NETCDFFORTARNDIR=/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4
+NETCDFFORTRANINCDIR=/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4/include
+NETCDFFORTRANLIBDIR=/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4/lib
+NETCDFFORTRAN_VERSION=4.4.4
+NFDIR=/mnt/HA/opt/netcdf-fortran/intel/2015/4.4.4
+BASH_ENV=/home/cl3293/.bashrc
+MPICC=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpicc
+MPICXX=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpic++
+MPIF77=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpif77
+MPIF90=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpif90
+MPIFC=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpifort
+MPI_CPPFLAGS=-I/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include
+MPI_HOME=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed
+MPI_INCDIR=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/include
+MPI_LIBDIR=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib
+MPI_RUN=/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpirun -x LD_LIBRARY_PATH -x BASH_ENV
+OMPI_CFLAGS=-fopenmp
+OMPI_LDFLAGS=-L/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib     -Wl,-rpath -Wl,/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/lib    -Wl,-rpath -Wl,/mnt/HA/opt/intel/composer_xe_2015.1.133/compiler/lib/intel64    -Wl,-rpath -Wl,/opt/mellanox/mxm/lib
+NPCOL_NPROW=8 2
+IOAPI_LOG_WRITE=F
+CTM_MAXSYNC=600
+CTM_MINSYNC=600
+CTM_PT3DEMIS=N
+CTM_EMLAYS=1
+KZMIN=N
+FL_ERR_STOP=F
+PROMPTFLAG=F
+GRIDDESC=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other/GRIDDESC
+GRID_NAME=CMAQ-BENCHMARK
+CONC_SPCS= NH3 ANH4I ANH4J 
+CONC_BLEV_ELEV= 1 34 
+AVG_CONC_SPCS=ALL
+ACONC_BLEV_ELEV= 1 34 
+ADJNLAYS_FRC=22
+FDM_TEST=T
+ADJ_LGRID_FREQ=OUTPUT_STEP
+CTM_APPL=bwd_NH3.base.20070610
+EMISDATE=20070610
+CHK_PATH=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base
+ADJ_LGRID=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/LGRID.bwd_NH3.20070610 -v
+ADJ_LGRID_EM=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EM.LGRID.bwd_NH3.20070610 -v
+CTM_XFIRST_OUT=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/XFIRST.bwd_NH3.20070610
+CTM_XFIRST_IN=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/XFIRST.20070610
+CTM_CONC_FWD=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610
+CTM_CGRID_FWD=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070610
+ADJ_CHEM_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CHEM_CHK.20070610 -v
+ADJ_VDIFF_CHK_N=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VDIFF_CHK.20070611 -v
+ADJ_VDIFF_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VDIFF_CHK.20070610 -v
+ADJ_AERO_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERO_CHK.20070610 -v
+ADJ_HA_RHOJ_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/HA_RHOJ_CHK.20070610 -v
+ADJ_VA_RHOJ_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VA_RHOJ_CHK.20070610 -v
+ADJ_HADV_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/HADV_CHK.20070610 -v
+ADJ_VADV_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/VADV_CHK.20070610 -v
+ADJ_EMIS_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EMIS_CHK.20070610 -v
+ADJ_EMIST_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EMIST_CHK.20070610 -v
+ADJ_CLD_CHK=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CLD_CHK.20070610 -v
+NH3_OFFLINE_FILE=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/NH3_OFFLINE_FILE/NH3_OFFLINE_FILE.20070610 -v
+INIT_LGRID_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/LGRID.bwd_NH3.20070611 -v
+INIT_EM_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EM.LGRID.bwd_NH3.20070611 -v
+ADJ_FORCE=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ADJ_FORCE.20070610
+DEPV_TRAC_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610
+OCEAN_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other/surf_BENCHMARK.ncf
+EMIS_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/emis/emis_CMAQ-NH3_Tracer_20070610.ncf
+INIT_GASC_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+INIT_AERO_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+INIT_NONR_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+INIT_TRAC_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611
+GRID_DOT_2D=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDDOT2D_20070610
+GRID_CRO_2D=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDCRO2D_20070610
+MET_CRO_2D=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610
+MET_DOT_3D=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METDOT3D_20070610
+MET_CRO_3D=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610
+MET_BDY_3D=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METBDY3D_20070610
+LAYER_FILE=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610
+XJ_DATA=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/jproc/JTABLE_2007161
+CTM_CONC_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610 -v
+A_CONC_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610 -v
+S_CGRID=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070610 -v
+CTM_DRY_DEP_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610 -v
+CTM_WET_DEP_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610 -v
+CTM_WET_DEP_2=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP2.20070610 -v
+CTM_SSEMIS_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/SSEMIS1.20070610 -v
+CTM_VIS_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610 -v
+CTM_DIAM_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERODIAM.20070610 -v
+CTM_IPR_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_1.20070610 -v
+CTM_IPR_2=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_2.20070610 -v
+CTM_IPR_3=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_3.20070610 -v
+CTM_IRR_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_1.20070610 -v
+CTM_IRR_2=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_2.20070610 -v
+CTM_IRR_3=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_3.20070610 -v
+CTM_RJ_1=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_1.20070610 -v
+CTM_RJ_2=/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_2.20070610 -v
+CTM_STDATE=2007161
+CTM_STTIME=000000
+CTM_RUNLEN=240000
+CTM_TSTEP=010000
+CTM_PROGNAME=/home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/ADJOINT_BWD
+ls -l /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/ADJOINT_BWD
+-rwxrwxr-x 1 cl3293 cappsGrp 10250753 Jul 23 18:43 /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/ADJOINT_BWD
+size /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/ADJOINT_BWD
+   text	   data	    bss	    dec	    hex	filename
+5372631	4013212	6970656	16356499	 f99493	/home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/ADJOINT_BWD
+if ( par == ser ) then
+/mnt/HA/opt/openmpi/intel/2015/1.8.1-mlnx-ofed/bin/mpirun -x LD_LIBRARY_PATH -x BASH_ENV -np 16 /home/cl3293/CMAQ_adj_NH3/cmaq_adj/scripts/BLD_bwd_NH3/ADJOINT_BWD
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     Version with PARMS3.EXT/PARAMETER::MXVARS3= 2048
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+      
+     Missing environment variable EXECUTION_ID
+     Value for GRID_NAME:  'CMAQ-BENCHMARK'
+     Value for GRID_NAME:  'CMAQ-BENCHMARK'
+
+     File "GRIDDESC" opened for input on unit:  99
+     /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other/GRIDDESC
+
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+     Value for NPCOL_NPROW:  '8 2'
+     Value for NPCOL_NPROW:  '8 2'
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+     Value for IOAPI_CHECK_HEADERS not defined;returning default:   FALSE
+      
+     "LAYER_FILE" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 34 lays, 17 vbles
+     NetCDF ID:     65536  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+ 
+      -=-  MPP Processor-to-Subdomain Map  -=-       
+  ___________________________________________________
+  |                                                 |
+  | PE     #Rows   Row_Range      #Cols   Col_Range |
+  |_________________________________________________|
+  |                                                 |
+  |  1       13      1:  13          4       1:   4 |
+  |  2       13      1:  13          3       5:   7 |
+  |  3       13      1:  13          3       8:  10 |
+  |  4       13      1:  13          3      11:  13 |
+  |  5       13      1:  13          3      14:  16 |
+  |  6       13      1:  13          3      17:  19 |
+  |  7       13      1:  13          3      20:  22 |
+  |  8       13      1:  13          3      23:  25 |
+  |  9       12     14:  25          4       1:   4 |
+  | 10       12     14:  25          3       5:   7 |
+  | 11       12     14:  25          3       8:  10 |
+  | 12       12     14:  25          3      11:  13 |
+  | 13       12     14:  25          3      14:  16 |
+  | 14       12     14:  25          3      17:  19 |
+  | 15       12     14:  25          3      20:  22 |
+  | 16       12     14:  25          3      23:  25 |
+  |_________________________________________________|
+ 
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+                                                                     
+     This program uses the EPA-AREAL/MCNC-EnvPgms/BAMS Models-3      
+     I/O Applications Programming Interface, [I/O API] which is      
+     built on top of the netCDF I/O library (Copyright 1993, 1996    
+     University Corporation for Atmospheric Research/Unidata         
+     Program) and the PVM parallel-programming library (from         
+     Oak Ridge National Laboratory).                                 
+     Copyright (C) 1992-2002 MCNC,                                   
+     (C) 1992-2013 Carlie J. Coats, Jr.,                             
+     (C) 2003-2012 Baron Advanced Meteorological Systems, LLC, and   
+     (C) 2014-2016 UNC Institute for the Environment.                
+     Released under the GNU LGPL  License, version 2.1.  See URL     
+                                                                     
+         https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html     
+                                                                     
+     for conditions of use.                                          
+                                                                     
+     ioapi-3.2: $Id: init3.F90 1 2017-06-10 18:05:20Z coats $
+     netCDF version 4.4.1 of Nov  7 2016 18:11:20 $
+      
+     Value for CTM_EMLAYS:  1
+     Value for ADJNLAYS_FRC:  22
+     Value for CTM_TSTEP:  10000
+     Value for CTM_RUNLEN:  240000
+     Value for CTM_STDATE:  2007161
+     Value for CTM_STTIME:  0
+     INIT_LGRID_1    :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/LGRID.bwd_NH3.20070611
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     
+     >>--->> WARNING in subroutine INIT_LGRID on PE 000
+     Could not open INIT_LGRID_1; initializing LGRID using only adjoint forcing
+     M3WARN:  DTBUF 0:00:00   June 11, 2007 (2007162:000000)
+     Value for FDM_TEST:  T returning TRUE
+     Value for FL_ERR_STOP:  F returning FALSE
+     Value for CTM_RUNLEN:  240000
+      
+     "GRID_DOT_2D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDDOT2D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "GRIDOUT_12CONUS_"
+     Dimensions: 26 rows, 26 cols, 1 lays, 9 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Time-independent data.
+     Checking header data for file: GRID_DOT_2D
+     Closing file GRID_DOT_2D
+      
+     "GRID_CRO_2D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDCRO2D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "GRIDOUT_12CONUS_"
+     Dimensions: 25 rows, 25 cols, 1 lays, 57 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Time-independent data.
+     Checking header data for file: GRID_CRO_2D
+     Closing file GRID_CRO_2D
+     GRID_CRO_3D     :GRID_CRO_3D
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "GRID_CRO_3D     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE GRID_CRO_3D
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     GRID_BDY_2D     :GRID_BDY_2D
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "GRID_BDY_2D     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE GRID_BDY_2D
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "EMIS_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/emis/emis_CMAQ-NH3_Tracer_20070610.ncf"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "TEST25"
+     Dimensions: 25 rows, 25 cols, 1 lays, 2 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: EMIS_1
+     Closing file EMIS_1
+      
+     "OCEAN_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/other/surf_BENCHMARK.ncf"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "WNDW_12US2"
+     Dimensions: 25 rows, 25 cols, 1 lays, 2 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Time-independent data.
+     Checking header data for file: OCEAN_1
+     Closing file OCEAN_1
+     MET_BDY_2D      :MET_BDY_2D
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "MET_BDY_2D      " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE MET_BDY_2D
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "MET_BDY_3D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METBDY3D_20070610"
+     File type BNDARY3 
+     Execution ID "mcip"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 34 lays, 17 vbles, 1 cells thick
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: MET_BDY_3D
+     Closing file MET_BDY_3D
+      
+     "MET_DOT_3D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METDOT3D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "METDOT_12CONUS_D"
+     Dimensions: 26 rows, 26 cols, 34 lays, 6 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: MET_DOT_3D
+     Closing file MET_DOT_3D
+      
+     "MET_CRO_2D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 1 lays, 34 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: MET_CRO_2D
+     Closing file MET_CRO_2D
+      
+     "MET_CRO_3D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 34 lays, 17 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: MET_CRO_3D
+     Closing file MET_CRO_3D
+      
+     "CTM_CONC_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 3 vbles
+     NetCDF ID:    131072  opened as VOLATILE READONLY   
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: CTM_CONC_1
+     Closing file CTM_CONC_1
+      
+     "CTM_DRY_DEP_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/DRYDEP.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 1 lays, 3 vbles
+     NetCDF ID:    131072  opened as VOLATILE READONLY   
+     Starting date and time  2007161:010000 (1:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        24
+     Checking header data for file: CTM_DRY_DEP_1
+     Starting time not on file
+     Closing file CTM_DRY_DEP_1
+      
+     "CTM_WET_DEP_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP1.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 1 lays, 4 vbles
+     NetCDF ID:    131072  opened as VOLATILE READONLY   
+     Starting date and time  2007161:010000 (1:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        24
+     Checking header data for file: CTM_WET_DEP_1
+     Starting time not on file
+     Closing file CTM_WET_DEP_1
+     CTM_WET_DEP_2   :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/WETDEP2.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_WET_DEP_2   " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_WET_DEP_2
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_SSEMIS_1    :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/SSEMIS1.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_SSEMIS_1    " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_SSEMIS_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "CTM_VIS_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AEROVIS.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 1 lays, 4 vbles
+     NetCDF ID:    131072  opened as VOLATILE READONLY   
+     Starting date and time  2007161:010000 (1:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        24
+     Checking header data for file: CTM_VIS_1
+     Starting time not on file
+     Closing file CTM_VIS_1
+     CTM_DIAM_1      :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERODIAM.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_DIAM_1      " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_DIAM_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_IPR_1       :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_1.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_IPR_1       " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_IPR_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_IPR_2       :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_2.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_IPR_2       " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_IPR_2
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_IPR_3       :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/PA_3.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_IPR_3       " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_IPR_3
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_IRR_1       :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_1.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_IRR_1       " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_IRR_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_IRR_2       :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_2.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_IRR_2       " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_IRR_2
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_IRR_3       :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/IRR_3.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_IRR_3       " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_IRR_3
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "A_CONC_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ACONC.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 30 vbles
+     NetCDF ID:    131072  opened as VOLATILE READONLY   
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        24
+     Checking header data for file: A_CONC_1
+     Closing file A_CONC_1
+      
+     "S_CGRID" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 31 vbles
+     NetCDF ID:    131072  opened as VOLATILE READONLY   
+     Starting date and time  2007162:000000 (0:00:00   June 11, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number         1
+     Checking header data for file: S_CGRID
+     Starting time not on file
+     Closing file S_CGRID
+      
+     "INIT_GASC_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 31 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007163:000000 (0:00:00   June 12, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number         1
+     Checking header data for file: INIT_GASC_1
+     Starting time not on file
+     Closing file INIT_GASC_1
+     BNDY_GASC_1     :BNDY_GASC_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "BNDY_GASC_1     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE BNDY_GASC_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "INIT_AERO_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 31 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007163:000000 (0:00:00   June 12, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number         1
+     Checking header data for file: INIT_AERO_1
+     Starting time not on file
+     Closing file INIT_AERO_1
+     BNDY_AERO_1     :BNDY_AERO_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "BNDY_AERO_1     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE BNDY_AERO_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "INIT_NONR_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 31 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007163:000000 (0:00:00   June 12, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number         1
+     Checking header data for file: INIT_NONR_1
+     Starting time not on file
+     Closing file INIT_NONR_1
+     BNDY_NONR_1     :BNDY_NONR_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "BNDY_NONR_1     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE BNDY_NONR_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "INIT_TRAC_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CGRID.20070611"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 31 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007163:000000 (0:00:00   June 12, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number         1
+     Checking header data for file: INIT_TRAC_1
+     Starting time not on file
+     Closing file INIT_TRAC_1
+     BNDY_TRAC_1     :BNDY_TRAC_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "BNDY_TRAC_1     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE BNDY_TRAC_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "DEPV_TRAC_1" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO2D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 1 lays, 34 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: DEPV_TRAC_1
+     Closing file DEPV_TRAC_1
+     EMIS_TRAC_1     :EMIS_TRAC_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "EMIS_TRAC_1     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE EMIS_TRAC_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_DEPV_DIAG   :CTM_DEPV_DIAG
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_DEPV_DIAG   " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_DEPV_DIAG
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_PT3D_DIAG   :CTM_PT3D_DIAG
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_PT3D_DIAG   " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_PT3D_DIAG
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_RJ_1        :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_1.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_RJ_1        " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_RJ_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_RJ_2        :/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/RJ_2.20070610
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_RJ_2        " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_RJ_2
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     INIT_MEDC_1     :INIT_MEDC_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "INIT_MEDC_1     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE INIT_MEDC_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     MEDIA_CONC      :MEDIA_CONC
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "MEDIA_CONC      " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE MEDIA_CONC
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     REGIONS_1       :REGIONS_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "REGIONS_1       " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE REGIONS_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     EMIS_A          :EMIS_A
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "EMIS_A          " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE EMIS_A
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     EMIS_B          :EMIS_B
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "EMIS_B          " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE EMIS_B
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     EMIS_M          :EMIS_M
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "EMIS_M          " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE EMIS_M
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     EMIS_P          :EMIS_P
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "EMIS_P          " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE EMIS_P
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     EMIS_N          :EMIS_N
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "EMIS_N          " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE EMIS_N
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     INIT_GASC_S     :INIT_GASC_S
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "INIT_GASC_S     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE INIT_GASC_S
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     INIT_AERO_S     :INIT_AERO_S
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "INIT_AERO_S     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE INIT_AERO_S
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     INIT_NONR_S     :INIT_NONR_S
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "INIT_NONR_S     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE INIT_NONR_S
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     BNDY_GASC_S     :BNDY_GASC_S
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "BNDY_GASC_S     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE BNDY_GASC_S
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     BNDY_AERO_S     :BNDY_AERO_S
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "BNDY_AERO_S     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE BNDY_AERO_S
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     BNDY_NONR_S     :BNDY_NONR_S
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "BNDY_NONR_S     " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE BNDY_NONR_S
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_SENS_1      :CTM_SENS_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_SENS_1      " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_SENS_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     A_SENS_1        :A_SENS_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "A_SENS_1        " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE A_SENS_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_SWETDEP_1   :CTM_SWETDEP_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_SWETDEP_1   " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_SWETDEP_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     CTM_SDRYDEP_1   :CTM_SDRYDEP_1
+     
+     >>--->> WARNING in subroutine OPEN3
+     File not available.
+     
+     File "CTM_SDRYDEP_1   " not currently open
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+       >>> COULD NOT CLOSE CTM_SDRYDEP_1
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+      
+     "ADJ_FORCE" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ADJ_FORCE.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 22 lays, 1 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Checking header data for file: ADJ_FORCE
+         Inconsistent values for NLAYS: 22 versus 34
+     Closing file ADJ_FORCE
+     
+     >>--->> WARNING in subroutine FLCHECK on PE 000
+     Inconsistent header data on input files
+     M3WARN:  DTBUF 0:00:00   June 10, 2007 (2007161:000000)
+     Value for CTM_MAXSYNC:  600
+     Value for CTM_MINSYNC:  600
+      
+     "MET_DOT_3D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METDOT3D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "METDOT_12CONUS_D"
+     Dimensions: 26 rows, 26 cols, 34 lays, 6 vbles
+     NetCDF ID:    131072  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Value for SIGMA_SYNC_TOP not defined; returning default :  0.7
+     Minimum layer limit for which adv = sync                                        
+     Top layer thru which sync step determined: 20
+     Value for ADV_HDIV_LIM not defined; returning default :  0.9
+     Maximum horiz. div. limit for adv step adjustment                               
+
+     From SYNCSTEP - date/time:  2007161/000000
+      
+     "MET_CRO_3D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METCRO3D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 34 lays, 17 vbles
+     NetCDF ID:    196608  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+      
+     "MET_BDY_3D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/METBDY3D_20070610"
+     File type BNDARY3 
+     Execution ID "mcip"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 34 lays, 17 vbles, 1 cells thick
+     NetCDF ID:    262144  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+      
+     "GRID_CRO_2D" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/mcip/GRIDCRO2D_20070610"
+     File type GRDDED3 
+     Execution ID "mcip"
+     Grid name "GRIDOUT_12CONUS_"
+     Dimensions: 25 rows, 25 cols, 1 lays, 57 vbles
+     NetCDF ID:    327680  opened as READONLY            
+     Time-independent data.
+
+     Computed synchronization step (HHMMSS): 001000
+     Number of Synchronization steps:  6
+
+     Value for ADJ_LGRID_FREQ:  'OUTPUT_STEP'
+     Value for ADJ_LGRID_FREQ:  'OUTPUT_STEP'
+      
+     "CTM_CONC_FWD" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 3 vbles
+     NetCDF ID:    393216  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Closing file CTM_CONC_FWD
+     
+     Value for IOAPI_CHECK_HEADERS not defined;returning default:   FALSE
+     Value for IOAPI_OFFSET_64 not defined;returning default:   FALSE
+     Value for IOAPI_CFMETA not defined;returning default:   FALSE
+     Value for IOAPI_CMAQMETA not defined; returning defaultval ':  'NONE'
+     Value for IOAPI_CMAQMETA not defined; returning defaultval ':  'NONE'
+     Value for IOAPI_SMOKEMETA not defined; returning defaultval ':  'NONE'
+     Value for IOAPI_SMOKEMETA not defined; returning defaultval ':  'NONE'
+     Value for IOAPI_TEXTMETA not defined; returning defaultval ':  'NONE'
+     Value for IOAPI_TEXTMETA not defined; returning defaultval ':  'NONE'
+      
+     "ADJ_LGRID" opened as NEW(CREAT/TRUNC)
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/LGRID.bwd_NH3.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 31 vbles
+     NetCDF ID:    393216  opened as VOLATILE READWRITE  
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number         0
+     Value for ADJ_LGRID_FREQ:  'OUTPUT_STEP'
+     Value for ADJ_LGRID_FREQ:  'OUTPUT_STEP'
+      
+     "CTM_CONC_FWD" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/CONC.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 34 lays, 3 vbles
+     NetCDF ID:    458752  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Closing file CTM_CONC_FWD
+      
+     "ADJ_LGRID_EM" opened as NEW(CREAT/TRUNC)
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/EM.LGRID.bwd_NH3.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 1 lays, 1 vbles
+     NetCDF ID:    458752  opened as VOLATILE READWRITE  
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number         0
+     Value for IOAPI_LOG_WRITE:  F returning FALSE
+     Value for IOAPI_LOG_WRITE:  F returning FALSE
+
+     Timestep written to ADJ_LGRID        for date and time  2007162:000000
+
+     Timestep written to ADJ_LGRID_EM     for date and time  2007162:000000
+
+     File "CTM_XFIRST_IN" opened for input on unit:  99
+     /mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/XFIRST.20070610
+
+     Value for ADV_HDIV_LIM not defined; returning default :  0.9
+     Maximum horiz. div. limit for adv step adjustment                               
+
+     From ADVSTEP - date/time:  2007161/230000
+
+     Layer   Advection   per Sync
+           Step (HHMMSS)  Step
+       34      001000       1
+       33      000500       2
+       32      000500       2
+       31      000500       2
+       30      000500       2
+       29      000500       2
+       28      000500       2
+       27      000500       2
+       26      000500       2
+       25      000500       2
+       24      000500       2
+       23      001000       1
+       22      001000       1
+       21      001000       1
+       20      001000       1
+       19      001000       1
+       18      001000       1  <- determined by HDIV_LIM
+       17      001000       1
+       16      001000       1
+       15      001000       1
+       14      001000       1
+       13      001000       1
+       12      001000       1
+       11      001000       1
+       10      001000       1
+        9      001000       1
+        8      001000       1
+        7      001000       1
+        6      001000       1
+        5      001000       1
+        4      001000       1
+        3      001000       1
+        2      001000       1
+        1      001000       1
+      
+     "ADJ_FORCE" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/ADJ_FORCE.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "CMAQ-BENCHMARK"
+     Dimensions: 25 rows, 25 cols, 22 lays, 1 vbles
+     NetCDF ID:    524288  opened as READONLY            
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          010000 (1:00:00 hh:mm:ss)
+     Maximum current record number        25
+     Closing file ADJ_FORCE
+
+     After NEXTIME: returned JDATE, JTIME 2007161 235000
+ Opening file ADJ_AERO_CHK    
+      
+     "ADJ_AERO_CHK" opened as OLD:READ-ONLY   
+     File name "/mnt/HA/groups/cappsGrp/cl3293/CMAQ_adj_NH3/cmaq_adj/CMAQadjBnmkData/output_NH3_2day.l22.hr2.base/AERO_CHK.20070610"
+     File type GRDDED3 
+     Execution ID "????????????????"
+     Grid name "METCRO_12CONUS_C"
+     Dimensions: 25 rows, 25 cols, 34 lays, 31 vbles
+     NetCDF ID:    524288  opened as VOLATILE READONLY   
+     Starting date and time  2007161:000000 (0:00:00   June 10, 2007)
+     Timestep                          001000 (0:10:00 hh:mm:ss)
+     Maximum current record number       144
+ Reading timestep:      2007161      235000  of ADJ_AERO_CHK    
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in rescld.f
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+ 
+ warning-slz: trick about reading rain the first time done in convcld_acm.F
+   mdate&mtime:     2007162           0
+   mdate&mtime adjusted for the 'fake' reading:     2007161      235959
+   mdate&mtime recovered:     2007162           0
+ 
+--------------------------------------------------------------------------
+mpirun noticed that process rank 11 with PID 39141 on node ic21n04 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+107.084u 17.635s 0:11.54 1080.6%	0+0k 109824+281928io 486pf+0w
+endif
+@ day--
+end
+while ( 9 > = 10 )
+echo end model run at  `date`
+date
+end model run at  Fri Jul 24 00:46:03 EDT 2020
+exit
