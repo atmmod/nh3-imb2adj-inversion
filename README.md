@@ -1,7 +1,15 @@
 # Code for the hybrid IMB2 + 4D-Var CrIS NH₃ emissions inversion (ERL)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23889908.svg)](https://doi.org/10.5281/zenodo.23889908)
+
 This repository archives the code behind the ERL paper on the hybrid IMB2 + 4D-Var inversion of NH₃ emissions with CrIS retrievals and the CMAQ adjoint.
 [Paper citation and DOI: to be added after publication.]
+
+## Citing this code
+
+Lyu, C., Liu, J., Shephard, M. W., Sitwell, M., Henze, D. K., Lombardo, M., Zhao, S., Hakami, A., McDonald, B. C., Rasool, Q. Z., Silver, J. D., Thomas, S., Rayner, P., and Capps, S. L.: Code for the hybrid IMB2 + 4D-Var CrIS NH3 inversion, Zenodo [code], https://doi.org/10.5281/zenodo.23889908, 2026.
+
+This DOI always resolves to the latest release. Version v1.0.0 is https://doi.org/10.5281/zenodo.23889909.
 
 | Directory | Contents | Source |
 |---|---|---|
